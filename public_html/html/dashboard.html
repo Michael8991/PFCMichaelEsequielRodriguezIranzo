@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador JJ</title>
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/dashboardv2.css">
+    <!-- ICONOS FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/e63352ce10.js" crossorigin="anonymous"></script>
+
+    <!-- REJILLAS BOOTSTRAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+
+<body>
+    <header>
+        <div class="logoContainer">
+            <a href="/php/dashboard.php">
+                <img src="../imagenes/Logos/LogoSimple.png" alt="">
+            </a>
+            <div class="logoText">
+                <strong class="left">CONSTRUCCIONES & REFORMAS</strong>
+                <span class="left">Especialistas en Alicatados y Solados </span>
+            </div>
+        </div>
+        <div class="userNavContainer">
+                <div class="dropdown">
+                    <button class="dropbtn"><a class="titleBottonUser" href="">Michael <i class="fa-solid fa-angle-down"></i></a></button>
+                    <div class="dropdown-content">
+                        <a href=""><i class="fa-regular fa-user"></i> Perfil</a>
+                        <a href="../php/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Salir</a>
+                    </div>
+                </div>
+                <div class="userPhoto">
+                    <img src="../imagenes/admin/FotoMichaelCV.JPG" alt="">
+                </div>  
+        </div>
+    </header>
+    <div class="dashBoard">
+        <div class="navDashBoard">
+            <div class="navDashBoardContainer">
+                <a class="active" data-target="#slide-0"><i class="fa-solid fa-gauge-high"></i>Dashboard <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-1"><i class="fa-regular fa-images"></i>Galeria <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-2"><i class="fa-solid fa-envelope"></i>Mensajes <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-3"><i class="fa-solid fa-calendar-days"></i>Calendario <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-4"><i class="fa-solid fa-list-check"></i>Tareas <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-5"><i class="fa-regular fa-file-excel"></i>Presupuestos <div class="seccionActiva"></div></a>
+                <a class="" data-target="#slide-6"><i class="fa-solid fa-ticket"></i>Notas y Mensajes internos <div class="seccionActiva"></div></a>
+            </div>
+        </div>
+        <div class="dashBoardContainer">
+            <div class="sliderContainer">
+                <div class="slider-wrapper">
+                    <div class="slider">
+                        <!-- DASHBOAD -->
+                        <div class="paneles" id="#slide-0"></div>
+                        <!-- GALERIA -->
+                        <div class="paneles" id="#slide-1"> 
+                            <p>Galeria de reformas</p>
+                            <ul>
+                                
+                                <li>
+                                    <div class="vistaPreviaElementoReformaGaleria">
+                                       <img src="../imagenes/works/Captura de pantalla 2023-09-25 a las 14.26.23.png" alt=""> 
+                                       <p>author</p>
+                                       <p>Titulo imagen</p>
+                                       <p>fecha</p>
+                                       <div class="accionesReformaExistente">
+                                            <a class="aniadir" href=""> <i class="fa-regular fa-pen-to-square"></i> </a>
+                                            <a class="borrar" href=""> <i class="fa-solid fa-trash"></i> </a>
+                                       </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- MENSAJES -->
+                        <div class="paneles" id="#slide-2"></div>
+                        <!-- CALENDARIO -->
+                        <div class="paneles" id="#slide-3"></div>
+                        <!-- TAREAS -->
+                        <div class="paneles" id="#slide-4"></div>
+                        <!-- PRESUPUSTOS -->
+                        <div class="paneles" id="#slide-5"></div>
+                        <!-- MENSAJES INTERNOS -->
+                        <div class="paneles" id="#slide-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/dashBoard.js"></script>
+</body>
+</html>

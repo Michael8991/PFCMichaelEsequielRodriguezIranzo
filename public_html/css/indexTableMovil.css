@@ -1,0 +1,124 @@
+/* 
+MEDIDAS BOOTSTRAP SISTEMA DE REJILLAS
+1200PX - 992PX - 768 - <768PX 
+
+ESTILOS PARA 768 < x < 992PX */
+
+@media screen and (max-width:1224px){
+    .workscontainer{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+
+    .city-stuff, .city-stuff > *{
+        display: none;
+    }
+
+    #home{
+        background: url(../imagenes/background-responsive.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .textos{
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+    }
+
+    .index1{
+        display: none;
+    }
+
+}
+/*ESTILOS PARA 768PX< */
+
+@media screen and (max-width: 991px) {
+
+    #home{
+        top: 105px;
+    }
+
+    .lastText{margin-bottom: 7rem;}
+
+    .city-stuff, .city-stuff > *{
+        display: none;
+    }
+
+}
+
+ @media screen and (max-width:576px){
+
+    .segundaImagen{
+        display: none;
+    }
+    .workscontainer{
+        display: none;
+    }
+    .workscontainerMobileDevice{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+    }
+    .cubeBackground{
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 50%;
+        left: -58%;
+        background-color: tomato;
+        transform: rotate(-45deg);
+        bottom: -17%;
+        border-radius:10%;
+    }
+
+    .workscontainerMobileDevice p{
+        position: relative;
+        z-index: 900;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;   
+        font-size: 17px;
+    }
+
+    .visitCard{
+        z-index: 900;
+        border-radius: 10px;
+        position: relative;
+        top: -20%;
+        width: 90%;
+        height: 40%;
+        background-color:rgba(128, 128, 128, 0.141);
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(3px);
+    }
+    .visitCardContainer{
+        display: grid;
+    }
+    .enlaceGaleria{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .enlaceGaleria button{
+            padding: 15px 25px;
+            border: unset;
+            border-radius: 15px;
+            color: #212121;
+            z-index: 1;
+            background: #e8e8e8;
+            position: relative;
+            font-weight: 1000;
+            font-size: 17px;
+            -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+            box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+            transition: all 250ms;
+            overflow: hidden;
+    }
+}   

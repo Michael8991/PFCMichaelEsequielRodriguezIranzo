@@ -1,0 +1,71 @@
+.elemento {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1s, transform 1s;
+}
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.elemento.aparece {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+* {
+    list-style: none;
+    box-sizing: border-box;
+}
+&:before, &:after {
+    box-sizing: border-box;
+}
+
+/**** Galeria ****/
+.gallery{
+    width: 100%;
+    min-height: 100vh;
+    position: static;
+}
+
+
+.row{
+    margin-top: 25px !important;
+}
+.galleryContainer .container .row:last-child{
+    margin-bottom: 35px;
+}
+
+.card {
+    width: 325px !important;
+    height: 350px;
+    position: relative;
+    box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 23px !important;
+    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+    cursor: pointer;
+    margin-bottom: 30px;
+    border: 0px !important;
+    background: transparent !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+.card a{
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    background: transparent;
+}
+.card img{
+    height: 350px;
+    border-radius: 7px !important;
+    width: 325px;
+    
+}
+
+

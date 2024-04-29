@@ -1,0 +1,174 @@
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.home-container{
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+.navegador a{
+    text-decoration: none;
+    color: black;
+}
+
+.progressive-steps-bar{
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: center;
+}
+
+.step{
+    display: flex;
+}
+
+.step .circle{
+    background-color: #ddd;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+
+.step .line{
+    width: 150px;
+    height: 5px;
+    background-color: #ddd;
+}
+
+.section-form{
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
+}
+
+.section-form > *{
+    margin: auto;
+}
+
+.addBudgetForm{
+    display: grid;
+}
+
+.form-container legend{
+    font-size: 15px;
+}
+
+.rowBudget{
+    display: flex;
+    align-items: center;
+}
+
+.rowBudget > *{
+    margin-right: 20px;
+    width: auto !important;
+    margin-bottom: 10px;
+
+}
+
+/* Estilos para mejorar la apariencia del dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.search-box {
+    margin-bottom: 10px;
+}
+
+.budgetTable tr{
+    height: 50px;
+}
+
+
+.removeRowBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px !important;
+    border: 0px solid transparent !important;
+    border-radius: 5px !important;
+}
+
+#visual1, #visual2 {
+    position: fixed;
+    z-index: -1; /* Para que estén detrás del contenido */
+}
+
+#visual1 {
+    left: 0;
+    bottom: 0;
+}
+
+#visual2 {
+    right: 0;
+}
+
+rect {
+    fill: none; /* Quita el fondo */
+}
+
+.required{
+    color: rgb(252, 145, 107);   
+}
+
+
+@keyframes fadeOutAndSlideDown {
+    0% { opacity: 0.25; transform: translateY(-25px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOutAndSlideUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0.25; transform: translateY(-25px); }
+}
+
+.element-removed{
+    animation: fadeOutAndSlideUp 0.5s ease-in-out !important; 
+}
+
+.alert {
+    animation: fadeOutAndSlideDown 0.5s ease-in-out;
+}
+
+.step-done, .step-done .circle, .step-done .line {
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+.step-done{
+    color: rgb(1, 83, 1);
+}
+.step-done .circle, .step-done .line{
+    background-color:rgb(1, 83, 1);
+    color: white;
+}

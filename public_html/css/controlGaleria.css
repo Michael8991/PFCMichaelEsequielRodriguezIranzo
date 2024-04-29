@@ -1,0 +1,139 @@
+
+
+/* Control de galeria */
+.controlGaleria{
+min-height: 100vh;
+width: 100%;
+background-color: white;
+display: flex;
+}
+.controlGaleriaContainer{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.controlGaleriaContainer nav{
+    display: flex;
+}
+
+.controlGaleriaContainer nav .form-inline .btn{
+    color: #F2622E;
+    border: 1px solid #F2622E;
+    margin-left: 5px;
+}
+.controlGaleriaContainer nav .form-inline .btn:hover{
+    background-color: rgb(59, 59, 59);
+    border: 1px solid rgb(59, 59, 59);
+}
+.controlGaleriaContainer nav .form-inline{
+    display: flex;
+}
+
+.tablaReformas{
+    width: 100%;
+    
+}
+
+.filaTablaReforma{
+    display: flex;
+    min-height: 50px;
+    width: 100%;
+}
+
+.filaTablaReforma th{
+    border-bottom: 1px solid grey;
+    background-color: white;
+}
+.filaTablaReforma th:nth-of-type(1), .filaTablaReforma td:nth-of-type(1){
+    flex: 1 0 0%;
+}
+.filaTablaReforma th:nth-of-type(2), .filaTablaReforma td:nth-of-type(2){
+    flex: 1 0 10%;
+}
+.filaTablaReforma th:nth-of-type(5), .filaTablaReforma th:nth-of-type(6){
+    flex: 0 0 3%;
+}
+.filaTablaReforma td:nth-of-type(5), .filaTablaReforma td:nth-of-type(6){
+    flex: 0 0 3%;
+}
+.filaTablaReforma td:nth-of-type(5) a, .filaTablaReforma td:nth-of-type(6) a{
+    float: right;
+    color: black;
+}
+.filaTablaReforma td:nth-of-type(5) a:hover{
+    color: rgb(23, 151, 23);
+}
+
+.filaTablaReforma td:nth-of-type(6) a:hover{
+    color: rgb(190, 30, 30);
+}
+.filaTablaReforma > *{
+    flex: 1 1 10%;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.filaTablaReforma:nth-of-type(2n-1){
+    background-color: rgb(249 250 251);
+}
+
+.filaTablaReforma td img{
+    height: 40px;
+    margin: auto 0 auto 5px;
+    border-radius: 10px;
+}
+
+
+.controlGaleriaContainer nav .pagination{
+    margin-top: 15px;
+}
+
+.controlGaleriaContainer nav  .pagination li a{
+    color: #F2622E;
+}
+
+
+
+
+
+.aniadirElementoButton{
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.192);
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 5px;
+}
+
+.aniadirElementoButtonContainer{
+    text-decoration: none;
+    color: #F2622E;
+}
+.aniadirElementoButtonContainer:hover{
+    text-decoration: none;
+    color: #F2622E;
+}
+.aniadirElementoButtonContainer i{
+    margin-right: 2px;
+}
+.aniadirElementoButton:hover{
+    background-color: rgb(59, 59, 59);
+}
+
+#confirmarEliminar .modal-header, #confirmarEliminar .modal-footer{
+    border-bottom: none;
+    border-top: none;
+}
+
+#confirmarEliminar .btn-primary{
+    background-color: #e62222;
+    border: #e62222;
+}
+#confirmarEliminar .btn-primary:hover{
+    background-color: #d61e1e;
+    border:  #d61e1e;
+}

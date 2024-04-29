@@ -1,0 +1,649 @@
+.form-overlay{display: none;}
+#form-container{display: none;}
+.elemento {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 1s, transform 1s;
+}
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.elemento.aparece {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+* {
+  list-style: none;
+  box-sizing: border-box;
+}
+  &:before, &:after {
+    box-sizing: border-box;
+  }
+
+
+/****Formulario****/
+
+.formulario{
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+}
+
+.contenedor{
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90%;
+  display: flex;
+  margin-top: 50px;
+}
+
+h1, h2, h3, h4{
+  font-family: Krona one;
+  color: black;
+  /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*/
+  margin: 30px 0px 0px 30px !important;
+
+}
+
+.contenedor p{
+  color: black;
+  margin: 5px 30px 5px 30px !important;
+  text-align: justify;
+}
+
+.formContainer{
+  background-color: white;
+  height: 600px;
+  width: 600px;
+  border-radius: 10px 0 0 10px;
+  margin-top: 25px;
+  -webkit-box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+
+  margin-left: auto;
+}
+
+.inputs{
+  background: transparent;
+  border: 1px solid;
+  padding: 10px;
+  font-size: 1em;
+  margin-bottom: 15px;
+  width: 90%;
+  color: black;
+  background-color: white;
+  margin-left: 30px;
+  
+}
+
+.nosotrosContactamos{
+  background-color:  rgb(212, 104, 25);
+  height: 650px;
+  width: 400px;
+  -webkit-box-shadow: 0px 0px 40px -21px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 40px -21px rgba(0,0,0,1);
+  box-shadow: 0px 0px 40px -21px rgba(0,0,0,1);
+}
+
+.nosotrosContactamos h2, .nosotrosContactamos p, .nosotrosContactamos .inputs{
+  color: white;
+}
+
+.nosotrosContactamos .inputs{
+  color: black;
+  width: 86%;
+}
+
+.whatsapp h4{
+  color: white;
+}
+
+.redes{
+  height: 600px;
+  margin-top: 25px;
+  width: 100px;
+  background-color: white;
+  border-radius: 0 10px 10px 0;
+  -webkit-box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 50px -28px rgba(0,0,0,0.75);
+
+  margin-right: auto;
+}
+/***** Boton Enviar Te Escribimos *****/
+.nosotrosContactamos button.learn-more .circle{
+  background-color: white;
+}
+
+.nosotrosContactamos button.learn-more .circle .icon {
+  background: #F2622E;
+}
+
+.nosotrosContactamos button.learn-more .circle .icon.arrow::before{
+  border-top: 0.125rem solid #F2622E;
+  border-right: 0.125rem solid #F2622E;
+}
+
+.nosotrosContactamos button.learn-more .button-text{
+  color: white;
+}
+
+.nosotrosContactamos button:hover .circle .icon.arrow {
+  background: #F2622E;
+}
+
+.nosotrosContactamos button:hover .button-text {
+  color: #F2622E;
+}
+
+.inputSend{
+ background: none;
+ border: none;
+}
+
+/***** Boton Enviar Escribenos *****/
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 0px 0px 0px 30px !important;
+ }
+ 
+ button.learn-more {
+  width: 12rem;
+  height: auto;
+  
+ }
+ 
+ button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 2.7rem;
+  height: 2.7rem;
+  background: #F2622E;
+  border-radius: 1.625rem;
+ }
+ 
+ button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+ }
+ 
+ button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+ }
+ 
+ button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+ }
+ 
+ button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: rgb(212, 104, 25);
+  font-weight: 700;
+  line-height: 0.88 !important;
+  text-align: center;
+  text-transform: uppercase;
+ }
+ 
+ button:hover .circle {
+  width: 100%;
+ }
+ 
+ button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+ }
+ 
+ button:hover .button-text {
+  color: #fff;
+ }
+/******************/
+
+.whatsappQR{
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15px;
+  position: relative;
+  display: grid;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: #f4f4f4;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsappQR img{
+  height: 125px;
+}
+
+.whatsapp p{
+  margin-top: 15px !important;
+  text-align: center;
+}
+
+/**** Social Media Icons *****/
+.socialMedia-container{
+  width: inherit;
+  height: 100%;
+  justify-content: center;
+  display: grid;
+  align-content: center;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+
+.wrapper {
+  display: grid;
+  list-style: none;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #f4f4f4;
+  border-radius: 50%;
+  padding: 15px;
+  margin: 30px 25px 25px 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1877F2;
+  color: #ffffff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1DA1F2;
+  color: #ffffff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #E4405F;
+  color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+  background: #333333;
+  color: #ffffff;
+}
+
+.wrapper .youtube:hover,
+.wrapper .youtube:hover .tooltip,
+.wrapper .youtube:hover .tooltip::before {
+  background: #CD201F;
+  color: #ffffff;
+}
+
+/****************************/
+
+@media screen and (max-width:1200px) {
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formContainer{
+    margin-right: auto;
+    border-radius: 10px;
+  }
+  .nosotrosContactamos{
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    right: 0;
+    display: none;
+  }
+
+  .redes{
+    display: none;
+  }
+
+
+.form-overlay {
+  display: block;
+  width: 0%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  opacity: 0;
+  background: #000;
+  transition: background 1s, opacity 0.4s, width 0s 0.4s;
+}
+.show-form-overlay .form-overlay {
+  width: 100%;
+  opacity: 0.7;
+  z-index: 999;
+  transition: background 1s, opacity 0.4s, width 0s;
+}
+.show-form-overlay.form-submitted .form-overlay {
+  background: #119da4;
+  transition: background 0.6s;
+}
+#form-container {
+  display: block;
+  cursor: pointer;
+  color: #fff;
+  z-index: 1000;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  background-color: #F2622E;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 60px;
+  max-width: 60px;
+  height: 60px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.2s 0.45s, height 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.25s, max-width 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, width 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
+}
+#form-container.expand {
+  cursor: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.17);
+  border-radius: 0;
+  width: 90%;
+  height: fit-content;
+  max-width: 610px;
+  padding: 0;
+  transition: all 0.2s, max-width 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, height 0.3s ease 0.25s;
+}
+#form-close {
+  cursor: pointer;
+}
+.icon::before {
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 60px;
+  display: block;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.icon:hover::before {
+  animation: wiggle 0.7s linear infinite;
+}
+.fa-phone::before {
+  display: block;
+}
+.fa-close::before {
+  display: none;
+}
+.expand.fa-phone::before {
+  display: none;
+}
+.expand.fa-close::before {
+  display: block;
+  animation: none;
+}
+#form-content {
+  font-family: Roboto, sans-serif;
+  transform: translateY(150%);
+  width: 100%;
+  opacity: 0;
+  text-align: left;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s 0.2s;
+}
+#form-content.expand {
+  transform: translateY(0px);
+  opacity: 1;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, opacity 0s;
+}
+#form-content form {
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 20px 20px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+#form-content form{
+  display: grid;
+} 
+
+#form-content form .inputs{
+  margin: 0 auto 0 auto;
+}
+
+#form-content .learn-more .circle{
+  background-color: white;
+}
+
+#form-content .learn-more .circle .icon::before{
+  border-top: 0.125rem solid #F2622E;
+  border-right: 0.125rem solid #F2622E;
+}
+
+#form-content .learn-more span{
+  color: white;
+}
+
+#form-content .learn-more:hover .button-text{
+  color: #F2622E;
+}
+#form-content .learn-more:hover .icon.arrow{
+  background-color: #F2622E;
+}
+
+#form-head {
+  font-size: 100%;
+  padding: 0;
+  margin: 0 20px;
+  color: #fff;
+  text-align: center;
+  transition: all 0.8s 0.6s;
+}
+#form-head h2, #form-head p {
+  padding: 0;
+  margin: 0 0 10px 0 !important;
+  text-align: center;
+  color: white;
+}
+#form-head .pre {
+  display: block;
+}
+#form-head .post {
+  display: none;
+}
+.form-submitted#form-head {
+  transform: translateY(250%);
+}
+.form-submitted#form-head .pre {
+  display: none;
+}
+.form-submitted#form-head .post {
+  display: block;
+}
+
+.whatsapp{
+  font-size: 100%;
+  padding: 0;
+  margin: 0 20px 10px 20px;
+  color: #fff;
+  text-align: center;
+  transition: all 0.8s 0.6s;
+}
+
+.whatsapp p{
+  color: white;
+}
+
+.button.button-text{
+  color: white;
+}
+@keyframes error {
+  0%, 100% {
+    transform: translateX(0);
+ }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-6px);
+ }
+  20%, 40%, 60%, 80% {
+    transform: translateX(6px);
+ }
+}
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-15deg);
+ }
+  50% {
+    transform: rotate(15deg);
+ }
+}
+
+}
+
+@media screen and (max-width:768px) {
+
+  #form-container{
+    bottom: 0;
+    left: auto;
+    right: 0;
+  }
+
+  #form-container.expand{
+    width: 100%;
+    margin: 0;
+  }
+
+  .formulario{
+    min-height: 100vh;
+    background-color: white;
+  }
+
+  .contenedor{
+    width: 100%;
+  }
+  .formContainer{
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .formContainer form{
+    display: grid;
+  }
+
+  .formContainer form > * {
+    margin: 0 auto 0 auto;
+  }
+
+}
+
+@media screen and (max-height:785px){
+  .formContainer{
+    margin: 100px auto 100px auto;
+  }
+  
+  #form-container{
+    bottom: 0;
+    left: auto;
+    right: 0;
+  }
+}
