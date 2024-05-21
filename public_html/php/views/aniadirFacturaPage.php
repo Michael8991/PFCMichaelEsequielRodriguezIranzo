@@ -30,9 +30,9 @@ require '../conexion.php'; // Incluir el archivo de conexión
 
 try {
     // Preparar la consulta SQL
-    $stmt = $conexion->prepare("SELECT * FROM Presupuestos
-                                JOIN Clientes ON Presupuestos.ClienteAsociadoID = Clientes.ClienteID
-                                JOIN users ON Presupuestos.UsuarioCreadorID = users.ID");
+    $stmt = $conexion->prepare("SELECT * FROM Budgets
+                                JOIN Customers ON Budgets.BudgetAssociatedCustomerID = Customers.CustomerID
+                                JOIN users ON Budgets.BudgetAssociatedCustomerID = users.ID");
     // Ejecutar la consulta
     $stmt->execute();
     // Obtener los resultados como un array asociativo

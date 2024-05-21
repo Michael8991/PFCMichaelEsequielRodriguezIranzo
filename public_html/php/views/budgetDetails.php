@@ -1,27 +1,75 @@
 <?php
-session_start();
+    session_start();
 
-if (!isset($_SESSION['user'])) {
-    header("location: login.php");
-}
-require '../conexion.php'; // Incluir el archivo de conexión
-
-$nombreUsuario = $_SESSION['user'];
-
-try {
-    $consultaCompleta = "SELECT * FROM Budgets
-                        -- JOIN customers ON Budgets.BudgetAssociatedCustomerID = customers.CustomerID
-                        JOIN users ON Budgets.BudgetCreatorUserID = users.ID;";
-
-    $ejConsCompleta = $conn->query($consultaCompleta);
-
-    if (!$ejConsCompleta) {
-        die("Error al ejecutar la consulta: " . $conn->errorInfo()[2]);
+    if (!isset($_SESSION['user'])) {
+        header("location: login.php");
     }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
+    require '../conexion.php'; // Incluir el archivo de conexión
 
+    $nombreUsuario = $_SESSION['user'];
+
+    $budget_id = $_GET['id'];
+
+    try {
+        // Consulta SQL
+        $consultaCompleta = "SELECT * FROM Budgets 
+                    JOIN Projects ON Budgets.ProjectID = Projects.ProjectID 
+                    JOIN customers ON Projects.CustomerID = customers.CustomerID 
+                    JOIN users ON Budgets.BudgetCreatorUserID = users.ID 
+                    -- JOIN budgetitems ON Budgets.BudgetID = budgetitems.BudgetID
+                    WHERE Budgets.BudgetID = :budget_id";
+
+        $consultaItems = "SELECT * FROM budgetitems WHERE BudgetID = :budget_id";
+
+
+        // Se prepara la consulta
+        $stmt = $conn->prepare($consultaCompleta);
+        $stmt->bindParam(":budget_id", $budget_id, PDO::PARAM_INT);
+        // Se ejecuta la consulta
+        $stmt->execute();
+    } catch (PDOException $e) {
+        // Manejar errores de consulta
+        echo "Error al ejecutar la consulta: " . $e->getMessage();
+    }
+
+    try{
+         // Obtener los resultados como un array asociativo
+         $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+         //Preparamos la consulta 2
+         $stmt = $conn->prepare($consultaItems);
+         $stmt->bindParam(":budget_id", $budget_id, PDO::PARAM_INT);
+         $stmt->execute();
+ 
+         $resultadosItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        echo 'Error en la consulta de items: '.$e->getMessage();
+    }
+
+    foreach($resultados as $resultado){
+        $projectName = $resultado['ProjectName']; 
+        $projectID = $resultado['ProjectID']; 
+        $customerName = $resultado['FirstName']; 
+        $customerSurname = $resultado['LastName']; 
+
+        $customer_complete_name = $customerName . ' ' . $customerSurname;
+
+        $issue_date = $resultado['BudgetEmissionDate'];
+        $exp_date = $resultado['BudgetValidityDate'];
+
+        $materials_not_included = $resultado['materialsNotIncluded'];
+
+        $estadoPresupuesto = $resultado['BudgetStatus'];
+
+        $paymentAtTheEnd = $resultado['paymentAtTheEnd'];
+        $paymentInProcess = $resultado['paymentInProcess']; 	
+        $paymentUponAccepting = $resultado['paymentUponAccepting'];
+        
+        $IVA = $resultado['IVA'];
+        $buildingPermit = $resultado['buildingPermit'];
+
+        $creator_user = $resultado['user'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +146,7 @@ try {
             <div class="dropdown">
                 <button class="dropbtn">
                     <a class="titleBottonUser" href="">
-                        <?php $nombreUsuario = $_SESSION['user']; echo $nombreUsuario ?>
+                        <?php ?>
                         <i class="fa-solid fa-angle-down"></i>
                     </a>
                 </button>
@@ -124,26 +172,31 @@ try {
     <div class="home">
     
         <div class="header-title mx-auto my-3" style="width:70%; position:relative;">
-            <h2>Crear presupuesto</h2>
+            <h2>Editar presupuesto</h2>
         </div>
         <div class="home-container">    
             <div class="form-container">
-                <form class="addBudgetForm" id="addBudgetForm" action="../BudgetOPs/insertBudget.php" method="POST">
+                <form class="addBudgetForm" id="UpdateForm" action="../BudgetOPs/updateBudget.php" method="POST">
+                <input type="hidden" name="budget_id" value="<?php echo $budget_id; ?>">
                     <div class="section-form" id="generalDatasSection">
-                        <h5>Datos generales  <?php $nombreUsuario = $_SESSION['user']; echo "<p style='color:grey; font-size:15px;'> Creado por: <i>" .$nombreUsuario. " </i> </p>"  ?></h5>
+                        <h5>Datos generales 
+                            <p style="color:grey; font-size:15px;">Creado por: 
+                                <i><?php echo $creator_user ?></i>
+                            </p>
+                        </h5>
                         <div class="rowBudget">
                             <label for="fechaEmision">Fecha de emisión:</label>
-                            <input type="date" class="form-control" id="fechaEmision" name="fechaEmisionInput" required>
+                            <input type="date" class="form-control" id="fechaEmision" name="fechaEmisionInput" value="<?= $issue_date ?>" required>
     
                             <label for="fechaValidez">Fecha de validez:</label>
-                            <input type="date" class="form-control" id="fechaValidez" name="fechaValidezInput" required>
+                            <input type="date" class="form-control" id="fechaValidez" name="fechaValidezInput"  value="<?= $exp_date ?>" required>
                         </div>
                         <div class="rowBudget">
                             <label for="searchProjectName">Proyecto:</label>
-                            <input autocomplete="off" class="form-control search-box" type="text" id="projectInputName" placeholder="Seleccione un proyecto" Disabled readonly>
-                            <input autocomplete="off" type="text" name="projectInputID" id="projectInputID" hidden>
+                            <input autocomplete="off" class="form-control search-box" type="text" id="projectInputName" placeholder="Seleccione un proyecto" value="<?= $projectName ?>" Disabled readonly>
+                            <input autocomplete="off" type="text" name="projectInputID" id="projectInputID" value="<?= $projectID?>" hidden>
                             <label for="searchCustomerInput">Cliente:</label>
-                            <input autocomplete="off" class="form-control search-box" type="text" name="searchCustomerInput" id="searchCustomerInput" Disabled readonly>
+                            <input autocomplete="off" class="form-control search-box" type="text" name="searchCustomerInput" id="searchCustomerInput" value="<?= $customer_complete_name ?>" Disabled readonly>
                             <button type="button" class="btn btn-primary btn-success" data-toggle="modal"  id="openBtnModalProjects" onclick="openProjectsModal()">Seleccionar proyecto</button>
                         </div>
                     </div>
@@ -155,6 +208,37 @@ try {
                                 <th class="text-center">Importe</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
+                            <?php 
+                                    // $oldMaterials[];
+                                    $idRow = 0;
+
+                                foreach($resultadosItems as $item){
+                                    $idRow--;
+                                    $itemDescription = $item['Description'];
+                                    $itemPrice = $item['TotalPrice'];
+                                    $itemID = $item['ItemID'];
+
+                                    
+                                    echo 
+                                    '<tr id="fila-'.$idRow.'">
+                                        <td class="">
+                                            <input type="text" class="form-control " name="oldMaterials['.$idRow.'][campo3]" placeholder="Material..." id="rowBudget-'.$idRow.'" value="'. $itemDescription .'">
+                                            <input type="number" id="rowBudget-'.$idRow.'-Id" name="oldMaterials['.$idRow.'][campo1]" hidden value="'.$itemID.'">
+                                        </td>
+                                        <td class="ps-2" style="width:20%;">
+                                            <input type="text" class="form-control amountBudget" placeholder="Importe" name="oldMaterials['.$idRow.'][campo2]" value="'.$itemPrice.'">
+                                        </td>
+                                        <td class="text-center"> 
+                                        <button type="button" class="removeRowBtn btn btn-danger" onclick="removeRowBudget('.$idRow.')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="color: white; height:27px">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                </svg>
+                                            </button>   
+                                        </td>
+                                    </tr>';
+                                }
+
+                            ?>
                             <tr id="parentAddBtn">
                                 <td colspan="3">
                                     <div class="col-12 d-flex justify-content-center">
@@ -183,41 +267,80 @@ try {
                         <br>
                         <div class="rowBudget">
                             <div class="form-floating" style="width: 100% !important">
-                                <textarea name="floatingTextarea2" class="form-control col-12" placeholder="Introduce los materiales no incluidos" id="floatingTextarea2" style="height: 100px;"></textarea>
+                                <textarea name="floatingTextarea2" class="form-control col-12" placeholder="Introduce los materiales no incluidos" id="floatingTextarea2" style="height: 100px;"><?= $materials_not_included ?></textarea>
                                 <label for="floatingTextarea2">Materiales no incluidos</label>
                             </div>
                         </div>
                         <br>
                         <div class="rowBudget">
                             <label for="TAXincluded">IVA incluido:</label>
-                            <div class="form-check">
-                                <input value="Si" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedYes">
-                                <label class="form-check-label" for="TAXincludedYes">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input value="No" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedNo" checked>
-                                <label class="form-check-label" for="TAXincludedNo">
-                                    No
-                                </label>
-                            </div>
+                            <?php
+                                if($IVA == 1){
+                                    echo
+                                        '<div class="form-check">
+                                            <input value="Si" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedYes" checked>
+                                            <label class="form-check-label" for="TAXincludedYes">
+                                                Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input value="No" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedNo">
+                                            <label class="form-check-label" for="TAXincludedNo">
+                                                No
+                                            </label>
+                                        </div>';
+                                }else{
+                                    echo 
+                                        '<div class="form-check">
+                                            <input value="Si" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedYes">
+                                            <label class="form-check-label" for="TAXincludedYes">
+                                                Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input value="No" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedNo" checked>
+                                            <label class="form-check-label" for="TAXincludedNo">
+                                                No
+                                            </label>
+                                        </div>';
+                                }
+                            
+                            ?>
                         </div>
                         <br>
                         <div class="rowBudget">
                             <label for="BuildingPermits">Permiso de obra es resoposabilidad del cliente:</label>
-                            <div class="form-check">
-                                <input value="Si" class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsYes" checked>
-                                <label class="form-check-label" for="BuildingPermitsYes">
-                                    Sí
-                                </label>
-                            </div>
-                            <div value="No" class="form-check">
-                                <input class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsNo">
-                                <label class="form-check-label" for="BuildingPermitsYes">
-                                    No
-                                </label>
-                            </div>
+                            <?php 
+                                if($buildingPermit == 1){
+                                    echo 
+                                        '<div class="form-check">
+                                            <input value="Si" class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsYes" checked>
+                                            <label class="form-check-label" for="BuildingPermitsYes">
+                                                Sí
+                                            </label>
+                                        </div>
+                                        <div value="No" class="form-check">
+                                            <input class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsNo">
+                                            <label class="form-check-label" for="BuildingPermitsYes">
+                                                No
+                                            </label>
+                                        </div>';
+                                }else{
+                                    echo 
+                                        '<div class="form-check">
+                                            <input value="Si" class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsYes">
+                                            <label class="form-check-label" for="BuildingPermitsYes">
+                                                Sí
+                                            </label>
+                                        </div>
+                                        <div value="No" class="form-check">
+                                            <input class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsNo" checked>
+                                            <label class="form-check-label" for="BuildingPermitsYes">
+                                                No
+                                            </label>
+                                        </div>';
+                                }
+                            ?>
                         </div>
                         <br>
                         <h6>Terminos de pago</h6>
@@ -226,7 +349,7 @@ try {
                             <div class="input-group-prepend">
                                 <span class="input-group-text rounded-end-0">Al aceptar el presupuesto:</span>
                             </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentUponAccepting">
+                            <input type="number" class="form-control percentageBudget" name="paymentUponAccepting" value="<?=$paymentUponAccepting?>">
                             <div class="input-group-append">
                                 <span class="input-group-text rounded-start-0">%</span>
                             </div>
@@ -235,7 +358,7 @@ try {
                             <div class="input-group-prepend">
                                 <span class="input-group-text rounded-end-0">En el proceso de obras:</span>
                             </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentInProcess">
+                            <input type="number" class="form-control percentageBudget" name="paymentInProcess" value="<?=$paymentInProcess?>">
                             <div class="input-group-append">
                                 <span class="input-group-text rounded-start-0">%</span>
                             </div>
@@ -244,7 +367,7 @@ try {
                             <div class="input-group-prepend">
                                 <span class="input-group-text rounded-end-0">Al finalizar el proyecto:</span>
                             </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentAtTheEnd">
+                            <input type="number" class="form-control percentageBudget" name="paymentAtTheEnd"value="<?=$paymentAtTheEnd?>">
                             <div class="input-group-append">
                                 <span class="input-group-text rounded-start-0">%</span>
                             </div>
@@ -502,7 +625,7 @@ try {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeSaveModal()">Continuar</button>
-                                <button type="submit" class="btn btn-primary btn-success" form="addBudgetForm">Aceptar</button>
+                                <button type="submit" class="btn btn-primary btn-success" form="UpdateForm">Aceptar</button>
                             </div>
                         </div>
                     </div>

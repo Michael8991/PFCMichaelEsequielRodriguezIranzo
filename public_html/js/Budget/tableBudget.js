@@ -1,3 +1,6 @@
+window.onload = function () {
+    handleChangeAmounts();
+}
 const totalBudgetInput = document.getElementById('totalBudgetInput');
 let totalBudget = 0;
 
@@ -9,8 +12,8 @@ function addRowBudget(event){
     event.preventDefault();
     const td = document.createElement('tr');
     td.id = `fila-${rowCounter}`
-    td.innerHTML = `<td class=""><input type="text" class="form-control " placeholder="Material..." id="rowBudget-${rowCounter}"></td>
-                    <td class="ps-2" style="width:20%;"><input type="number" class="form-control amountBudget" placeholder="Importe"></td>
+    td.innerHTML = `<td class=""><input type="text" class="form-control " name="materials[${rowCounter}][campo3]" placeholder="Material..." id="rowBudget-${rowCounter}"></td>
+                    <td class="ps-2" style="width:20%;"><input type="text" class="form-control amountBudget" placeholder="Importe" name="materials[${rowCounter}][campo2]"></td>
                     <td class="text-center"> 
                     <button type="button" class="removeRowBtn btn btn-danger" onclick="(removeRowBudget(${rowCounter}))">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="color: white; height:27px">
@@ -31,9 +34,11 @@ function addRowBudgetService(){
     const td = document.createElement('tr');
     td.id = `fila-${rowCounter}`
     td.innerHTML = `<td class="">
-                        <input type="text" class="form-control " placeholder="Material..." id="rowBudget-${rowCounter}">
-                        <input type="number" id="rowBudget-${rowCounter}-Id" hidden></td>
-                    <td class="ps-2" style="width:20%;"><input type="number" class="form-control amountBudget" placeholder="Importe"></td>
+                        <input type="text" class="form-control " name="materials[${rowCounter}][campo3]" placeholder="Material..." id="rowBudget-${rowCounter}">
+                        <input type="number" id="rowBudget-${rowCounter}-Id" name="materials[${rowCounter}][campo1]" hidden></td>
+                    <td class="ps-2" style="width:20%;">
+                        <input type="text" class="form-control amountBudget" placeholder="Importe" name="materials[${rowCounter}][campo2]">
+                    </td>
                     <td class="text-center"> 
                     <button type="button" class="removeRowBtn btn btn-danger" onclick="(removeRowBudget(${rowCounter}))">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="color: white; height:27px">

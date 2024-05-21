@@ -4,30 +4,35 @@
     const fechaValidezInput = document.getElementById('fechaValidez');
     const proyectoInput = document.getElementById('projectInputName');
     const generalDatasSection = document.getElementById('generalDatasSection')
-
+    
 
 
 
     const seccionListaProyectos = document.getElementById('modalFooterProjects');
     const seccionListaClientes = document.getElementById('modalFooterCustomers');
 
-const guardarBtn = document.getElementById('btnSubmitBudgetForm');
-let section;
-let messageError;
-let error;
-guardarBtn.addEventListener('click', async (event)=>{
-    event.preventDefault();
-    
-    
+    const guardarBtn = document.getElementById('btnSubmitBudgetForm');
+    let section;
+    let messageError;
+    let error;
 
+    // guardarBtn.addEventListener('click', async (event)=>{
+    //     event.preventDefault();
 
-    // validateData(fechaEmisionInput.value, 'La fecha de emisión no es válida', 'emptyEmissionDateError',generalDatasSection);
-    // validateData(fechaValidezInput.value, 'La fecha de validez no es válida', 'emptyValidateDateError',generalDatasSection);
-    // validateData(proyectoInput.value, 'Rellene el campo del proyecto', 'emptyProjectError',generalDatasSection);
-    
-    // checkAlerts()
-    
-});
+    //     validateData(fechaEmisionInput.value, 'La fecha de emisión no es válida', 'emptyEmissionDateError',generalDatasSection);
+    //     validateData(fechaValidezInput.value, 'La fecha de validez no es válida', 'emptyValidateDateError',generalDatasSection);
+    //     validateData(proyectoInput.value, 'Rellene el campo del proyecto', 'emptyProjectError',generalDatasSection);
+    //     validateData()
+    //     checkAlerts()
+        
+    // });
+
+    // fechaEmisionInput.addEventListener('blur', () =>{
+    //     validateData(fechaEmisionInput.value, 'La fecha de emisión no es válida', 'emptyEmissionDateError',generalDatasSection);
+    // });
+    // fechaValidezInput.addEventListener('blur', () =>{
+    //     validateData(fechaValidezInput.value, 'La fecha de validez no es válida', 'emptyValidateDateError',generalDatasSection);
+    // });
 
     // function checkAlerts(){
     //     const counterErrorAlertMessage = document.querySelectorAll('.alert');
@@ -44,25 +49,25 @@ guardarBtn.addEventListener('click', async (event)=>{
     let generalDataValidated = false;
   
 
-    //funciones
-    function validateData(value, errorMessage, error, section){
-        if(!value){
-            if(!document.querySelector(`.${error}`)){
-                errorAlertMessage(errorMessage, section, error);
-            }
-        }else if(document.querySelector(`.${error}`)){
-            deleteErrorAlertMessage(value, error)
-        }
-    }
-    function validateGeneralData(value, errorMessage, error){
-        if(!value){
-            if(!document.querySelector(`.${error}`)){
-                errorAlertMessage(errorMessage, section, error);
-            }
-        }else if(document.querySelector(`.${error}`)){
-            deleteErrorAlertMessage(value, error)
-        }
-    }
+    // //funciones
+    // function validateData(value, errorMessage, error, section){
+    //     if(!value){
+    //         if(!document.querySelector(`.${error}`)){
+    //             errorAlertMessage(errorMessage, section, error);
+    //         }
+    //     }else if(document.querySelector(`.${error}`)){
+    //         deleteErrorAlertMessage(value, error)
+    //     }
+    // }
+    // function validateGeneralData(value, errorMessage, error){
+    //     if(!value){
+    //         if(!document.querySelector(`.${error}`)){
+    //             errorAlertMessage(errorMessage, section, error);
+    //         }
+    //     }else if(document.querySelector(`.${error}`)){
+    //         deleteErrorAlertMessage(value, error)
+    //     }
+    // }
 
     function errorAlertMessage(errorMessage, section, error){
         const errorAlert = document.createElement('div');
@@ -89,6 +94,8 @@ guardarBtn.addEventListener('click', async (event)=>{
         }else{
             error = 'noProjectSelected';
             valor = id;
+            deleteErrorAlertMessage(valor, error)
+            error ='emptyProjectError';
             deleteErrorAlertMessage(valor, error)
         }
     }

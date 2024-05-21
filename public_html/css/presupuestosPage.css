@@ -4,13 +4,14 @@
 .facturas{
     min-height: 100vh;
     width: 100%;
-    background-color: white;
+    background-color: whites;
     display: flex;
     }
     .facturas-container{
         width: 90%;
         margin-right: auto;
         margin-left: auto;
+        margin-top: 20px;
     }
     
     .facturas-container nav{
@@ -23,8 +24,9 @@
         margin-left: 5px;
     }
     .facturas-container nav .form-inline .btn:hover{
-        background-color: #dee2e6;
-        border: 1px solid #dee2e6;
+        background-color: #F2622E;
+        color: white;
+        border: 1px solid transparent;
     }
     .facturas-container nav .form-inline{
         display: flex;
@@ -40,22 +42,33 @@
         min-height: 50px;
         width: 100%;
     }
+
+    .filaTablaReforma:hover{
+        background-color: rgb(230, 230, 230) !important;
+        cursor: pointer;
+    }
+
+    #tableHeader{
+        background-color: rgb(243, 243, 243) !important;
+    }
     
     .filaTablaReforma th{
-        border-bottom: 1px solid grey;
-        background-color: white;
+        /* border-bottom: 1px solid grey; */
     }
     .filaTablaReforma th:nth-of-type(1), .filaTablaReforma td:nth-of-type(1){
-        flex: 1 0 0%;
+        flex: 1 0 10%;
     }
     .filaTablaReforma th:nth-of-type(2), .filaTablaReforma td:nth-of-type(2){
         flex: 1 0 10%;
     }
     .filaTablaReforma th:nth-of-type(5), .filaTablaReforma th:nth-of-type(6){
-        flex: 0 0 3%;
+        flex: 0 0 10%;
     }
     .filaTablaReforma td:nth-of-type(5), .filaTablaReforma td:nth-of-type(6){
-        flex: 0 0 3%;
+        flex: 0 0 10%;
+    }
+    .filaTablaReforma td:nth-of-type(6){
+        display: flex;
     }
     .filaTablaReforma td:nth-of-type(5) a, .filaTablaReforma td:nth-of-type(6) a{
         float: right;
@@ -69,7 +82,7 @@
         color: rgb(190, 30, 30);
     }
     .filaTablaReforma > *{
-        flex: 1 1 10%;
+        flex: 1 1 5%;
         line-height: 50px;
         vertical-align: middle;
         font-size: 15px;
@@ -99,6 +112,10 @@
     
     
     .aniadirElementoButton{
+        
+    }
+    
+    .aniadirElementoButtonContainer{
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -108,21 +125,21 @@
         transition: all 0.3s;
         padding: 5px;
         font-weight: 400;
-    }
-    
-    .aniadirElementoButtonContainer{
+        border: 1px solid #F2622E;
         text-decoration: none;
         color: #F2622E;
     }
+    /* .aniadirElementoButton:hover{
+        
+    } */
     .aniadirElementoButtonContainer:hover{
-        text-decoration: none;
-        color: #F2622E;
+        background-color: #F2622E;
+        border: 1px solid transparent;
+        border: 1px solid transparent;
+        color: white;
     }
     .aniadirElementoButtonContainer i{
         margin-right: 2px;
-    }
-    .aniadirElementoButton:hover{
-        background-color: #dee2e6;
     }
     
     #confirmarEliminar .modal-header, #confirmarEliminar .modal-footer{
@@ -138,3 +155,49 @@
         background-color: #d61e1e;
         border:  #d61e1e;
     }
+
+.estado-Pendiente{
+    margin-bottom: 0;
+    border-radius: 5px;
+    background-color:rgb(255, 238, 222);
+    color: rgb(252, 139, 53);
+    align-items: center;
+    display: flex;
+    text-align: center;
+    padding: 9px;
+    margin: auto;
+    height: 35px;
+}
+
+.estado-Aprobado{
+    margin-bottom: 0;
+    border-radius: 5px;
+    background-color:rgb(222, 255, 223);
+    color: rgb(31, 129, 32);
+    align-items: center;
+    display: flex;
+    text-align: center;
+    padding: 9px;
+    margin: auto;
+    height: 35px;
+}
+
+.estado-Rechazado{
+    margin-bottom: 0;
+    border-radius: 5px;
+    background-color:rgb(254, 227, 223);
+    color: rgb(251, 67, 46);
+    align-items: center;
+    display: flex;
+    text-align: center;
+    padding: 9px;
+    margin: auto;
+    height: 35px;
+}
+
+.activePag:first-child{
+    background-color: whitesmoke;
+}
+.activePag a{
+    background-color: whitesmoke;
+}

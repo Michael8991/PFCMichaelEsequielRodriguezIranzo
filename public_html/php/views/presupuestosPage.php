@@ -2,35 +2,27 @@
     session_start();
 
     if (!isset($_SESSION['user'])) {
-        $nombreUsuario = $_SESSION['user'];
         header("location: login.php");
     }
+    require '../conexion.php'; 
+    include '../BudgetOPs/pageBudget.php';
 
-    require '../conexion.php'; // Incluir el archivo de conexión
+    $nombreUsuario = $_SESSION['user'];
 
-    try {
-        // Consulta SQL
-        $consultaCompleta = "SELECT * FROM Budgets
-                            JOIN customers ON Budgets.ClienteAsociadoID = customers.CustomerID
-                            JOIN users ON Budgets.UsuarioCreadorID = users.ID";
-
-        // Preparar la consulta
-        $stmt = $conn->prepare($consultaCompleta);
-
-        // Ejecutar la consulta
+    try{
+        $sql = "SELECT CompanyID, ID FROM Users Where user = :userName";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":userName", $nombreUsuario, PDO::PARAM_STR);
         $stmt->execute();
-
-        // Obtener los resultados como un array asociativo
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Si deseas hacer algo con los resultados, puedes iterar sobre $resultados
-        foreach ($resultados as $fila) {
-            // Haz algo con cada fila, por ejemplo, imprimir el ID del presupuesto
-            echo $fila['BudgetID'];
-        }
-    } catch (PDOException $e) {
-        // Manejar errores de consulta
-        echo "Error al ejecutar la consulta: " . $e->getMessage();
+    }catch(PDOException $e){
+        echo 'error'. $e->getMessage();
+    }
+    if($stmt){
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $company_id = $row[0]['CompanyID'];
+        $user_id = $row[0]['ID'];
+    }else{
+        echo "error de usuario";
     }
 ?>
 
@@ -47,9 +39,9 @@
     <link rel="stylesheet" href="../../css/presupuestosPage.css">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap JavaScript y dependencias Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
     <script src="https://kit.fontawesome.com/e63352ce10.js" crossorigin="anonymous"></script>
@@ -95,75 +87,112 @@
 
     <div class="facturas">
         <div class="facturas-container">
-            <h5>Facturación</h5>
+            <h5>Presupuestos</h5>
                 <nav class="navbar navbar-light">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search"id="searchInput">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
                     </form>
                     <div class="aniadirElementoButton">
                         <a class="aniadirElementoButtonContainer" href="aniadirPresupuestoPage.php">
-                            + Añadir
+                            Añadir
                         </a>
                     </div>
                 </nav>
             <table class="tablaReformas"> 
-                    <tr class="filaTablaReforma">
-                        <th>Número</th>
-                        <th>Creador</th>
-                        <th>Cliente</th>
-                        <th>Teléfono</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th colspan=2>Acciones</th>
-                        
+                <thead>
+                    <tr class="filaTablaReforma rounded-top-2 px-2 border-bottom" id="tableHeader">
+                        <th>
+                            <i class="fa-solid fa-folder-open mx-1"></i>
+                            Nombre del Proyecto
+                        </th>
+                        <th>
+                            <i class="fa-solid fa-user mx-1"></i>
+                            Cliente
+                        </th>
+                        <th class="text-center">
+                            <i class="fa-solid fa-calendar mx-1"></i>
+                            Fecha Emisión
+                        </th>
+                        <th class="text-center">
+                            <i class="fa-solid fa-calendar-xmark mx-1"></i>
+                            Fecha expiración
+                        </th>
+                        <th class="text-center">
+                            <i class="fa-solid fa-spinner mx-1"></i>
+                            Estado
+                        </th>
+                        <th class="text-center">
+                            <i class="fa-solid fa-ellipsis-vertical mx-1"></i>
+                            Acciones
+                        </th>
                     </tr>
-                    <?php
-                        mysqli_data_seek($ejConsCompleta, 0);//Reinicio de puntero
-                
-                        while ($row = mysqli_fetch_assoc($ejConsCompleta)) {
+                </thead>
+                    <tbody id="budgetsTbody">
+                        <?php
+                            foreach($records as $resultado){
+                                $budgetID = $resultado['BudgetID'];
+                                $projectName = $resultado['ProjectName']; 
+                                $customerName = $resultado['CustomerName']; 
+                                $issue_date = $resultado['BudgetEmissionDate'];
+                                $exp_date = $resultado['BudgetValidityDate'];
+                                $estadoPresupuesto = $resultado['BudgetStatus'];
 
-                            $elementoId = $row['PresupuestoID']; 
-                            $creador = $row['UsuarioCreadorID']; 
-                            $clienteAsociado = $row['ClienteAsociadoID'];
-                            $telefonoCliente = $row['Telefono'];
-                            $estadoPresupuesto = $row['Estado'];
-                            $fechaEmision = $row['FechaEmision'];
-    
-                            
-        
-                
-                            // Imprime la lista de elementos con el atributo data-id configurado
-                            echo '<tr class="filaTablaReforma">';
-                                echo '<td> <img src="' .$elementoId. '" alt="Imagen de la reforma"></td>';
-                                echo '<td>' .$creador. '</td>';
-                                echo '<td>' .$clienteAsociado. '</td>';
-                                echo '<td>' .$telefonoCliente. '</td>';
-                                echo '<td>' .$estadoPresupuesto. '</td>';
-                                echo '<td>' .$fechaEmision. '</td>';
-                                echo '<td> <a class="editar" href=""> <i class="fa-regular fa-pen-to-square"></i> </a> </td>';
-                                echo '<td> <a class="borrar" href="../js/dashBoard.js" data-id="' .$elementoId. '"> <i class="fa-solid fa-trash"></i> </a> </td>';
-                            echo '</tr>';
-                        }
-                    ?>
+                                echo '<tr class="filaTablaReforma px-2 border-bottom">';
+                                    echo '<td>' .$projectName. '</td>';
+                                    echo '<td>' .$customerName.'</td>';
+                                    echo '<td class="text-center">' .$issue_date. '</td>';
+                                    echo '<td class="text-center">' .$exp_date. '</td>';
+                                    echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$estadoPresupuesto.'">' .$estadoPresupuesto. '</p></td>';
+                                    echo '<td>
+                                            <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
+                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $budgetID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
+                                            </td>';
+                                echo '</tr>';
+                            }
+                        ?>
+                    </tbody>
                 </table>
-                <nav class="justify-content-center" aria-label="...">
-                    <ul class="pagination pagination-sm">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    </ul>
-                </nav>
+
+                <nav class="justify-content-center">
+                <ul class="pagination pagination-sm">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>" tabindex="-1">Anterior</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php
+                    $range = 3;
+                    $start = max(1, $page - $range);
+                    $end = min($total_pages, $page + $range);
+
+                    for ($i = $start; $i <= $end; $i++): ?>
+                        <li class="page-item <?php echo ($i == $page) ? 'activePag' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+
+
                 <!-- </ul> -->
             </div>
         </div>
-        Button trigger modal
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
     Launch demo modal
-    </button>
+    </button> -->
 
 <!-- Modal -->
-    <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,7 +201,7 @@
                 
                 <div class="modal-footer">
                     <form id="confirmarEliminarForm" action="operacionEliminarElementoGaleria.php" method="POST">
-                        <!-- Campo oculto para almacenar el ID del elemento a eliminar -->
+                        Campo oculto para almacenar el ID del elemento a eliminar 
                         <input type="hidden" id="elementoIdInput" name="elemento_id" value="">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -180,8 +209,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
         </div>
     </div>
+    <script src="../../js/Budget/searchBudget.js"></script>
 </body>
 </html>

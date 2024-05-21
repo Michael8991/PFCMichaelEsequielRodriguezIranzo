@@ -55,10 +55,9 @@ searchProjectInput.addEventListener('input', () => {
 let projects;
 
 function seachAllProjects(){    
-    // Obtener la lista de proyectos
     projectList.innerHTML = ``;
     
-    // Realizar una solicitud AJAX para obtener los proyectos
+    // Se realiza una solicitud AJAX para obtener los proyectos
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
