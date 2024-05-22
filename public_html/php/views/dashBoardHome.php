@@ -138,6 +138,12 @@
                             <p>Clientes</p>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="botonesNavegador" href="projectsPage.php">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>Proyectos</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

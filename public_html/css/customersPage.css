@@ -1,0 +1,155 @@
+
+
+/* Control de galeria */
+.facturas{
+    min-height: 100vh;
+    width: 100%;
+    background-color: whites;
+    display: flex;
+    }
+    .facturas-container{
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+    }
+    
+    .facturas-container nav{
+        display: flex;
+    }
+    
+    .facturas-container nav .form-inline .btn{
+        color: #F2622E;
+        border: 1px solid #F2622E;
+        margin-left: 5px;
+    }
+    .facturas-container nav .form-inline .btn:hover{
+        background-color: #F2622E;
+        color: white;
+        border: 1px solid transparent;
+    }
+    .facturas-container nav .form-inline{
+        display: flex;
+    }
+    
+    .tablaReformas{
+        width: 100%;
+        
+    }
+    
+    .filaTablaReforma{
+        display: flex;
+        min-height: 50px;
+        width: 100%;
+    }
+
+    .filaTablaReforma:hover{
+        background-color: rgb(230, 230, 230) !important;
+        cursor: pointer;
+    }
+
+    #tableHeader{
+        background-color: rgb(243, 243, 243) !important;
+    }
+    
+    .filaTablaReforma th:nth-of-type(1), .filaTablaReforma td:nth-of-type(1){
+        flex: 1 0 10%;
+    }
+    .filaTablaReforma th:nth-of-type(2), .filaTablaReforma td:nth-of-type(2){
+        flex: 1 0 10%;
+    }
+    .filaTablaReforma th:nth-of-type(5), .filaTablaReforma th:nth-of-type(4){
+        flex: 0 0 15%;
+    }
+    .filaTablaReforma td:nth-of-type(5), .filaTablaReforma td:nth-of-type(4){
+        flex: 0 0 15%;
+    }
+    .filaTablaReforma td:nth-of-type(5){
+        display: flex;
+    }
+    .filaTablaReforma td:nth-of-type(5) a, .filaTablaReforma td:nth-of-type(4) a{
+        float: right;
+        color: black;
+    }
+    .filaTablaReforma td:nth-of-type(5) a:hover{
+        color: rgb(23, 151, 23);
+    }
+    
+    .filaTablaReforma td:nth-of-type(5) a:hover{
+        color: rgb(190, 30, 30);
+    }
+    .filaTablaReforma > *{
+        flex: 1 1 5%;
+        line-height: 50px;
+        vertical-align: middle;
+        font-size: 15px;
+    }
+    
+    .filaTablaReforma:nth-of-type(2n-1){
+        background-color: rgb(249 250 251);
+    }
+    
+    .filaTablaReforma td img{
+        height: 40px;
+        margin: auto 0 auto 5px;
+        border-radius: 10px;
+    }
+    
+    
+    .facturas-container nav .pagination{
+        margin-top: 15px;
+    }
+    
+    .facturas-container nav  .pagination li a{
+        color: #F2622E;
+    }
+ 
+    .aniadirElementoButtonContainer{
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.192);
+        cursor: pointer;
+        transition: all 0.3s;
+        padding: 5px;
+        font-weight: 400;
+        border: 1px solid #F2622E;
+        text-decoration: none;
+        color: #F2622E;
+    }
+    /* .aniadirElementoButton:hover{
+        
+    } */
+    .aniadirElementoButtonContainer:hover{
+        background-color: #F2622E;
+        border: 1px solid transparent;
+        border: 1px solid transparent;
+        color: white;
+    }
+    .aniadirElementoButtonContainer i{
+        margin-right: 2px;
+    }
+    
+    #confirmarEliminar .modal-header, #confirmarEliminar .modal-footer{
+        border-bottom: none;
+        border-top: none;
+    }
+    
+    #confirmarEliminar .btn-primary{
+        background-color: #e62222;
+        border: #e62222;
+    }
+    #confirmarEliminar .btn-primary:hover{
+        background-color: #d61e1e;
+        border:  #d61e1e;
+    }
+
+
+
+.activePag:first-child{
+    background-color: whitesmoke;
+}
+.activePag a{
+    background-color: whitesmoke;
+}

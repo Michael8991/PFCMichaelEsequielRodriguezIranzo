@@ -18,7 +18,7 @@ function getOffset($page, $items_per_page) {
 
 function countAllRecords($conn, $company_id) {
     try {
-        $stmt = $conn->prepare('SELECT COUNT(*) FROM Budgets WHERE CompanyID = :company_id');
+        $stmt = $conn->prepare('SELECT COUNT(*) FROM Customers WHERE CompanyID = :company_id');
         $stmt->bindParam(':company_id', $company_id, PDO::PARAM_INT);
         $stmt->execute();
         $total_items = $stmt->fetchColumn();
@@ -54,9 +54,9 @@ function getCompanyID($conn, $user) {
 
 function getRecords($conn, $items_per_page, $offset, $company_id, $searchTerm = '') {
     try {
-
+        
         if (empty($searchTerm)) {
-            $sql = 'SELECT * FROM Budgets WHERE CompanyID = :companyID LIMIT :limit OFFSET :offset';
+            $sql = 'SELECT * FROM Customers WHERE CompanyID = :companyID LIMIT :limit OFFSET :offset';
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':companyID', $company_id, PDO::PARAM_INT);
             $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
@@ -66,7 +66,7 @@ function getRecords($conn, $items_per_page, $offset, $company_id, $searchTerm = 
             
         } else if (!empty($searchTerm)) {
             $searchTermWildcard = '%' . $searchTerm . '%';
-            $sql = 'SELECT * FROM Budgets WHERE CompanyID = :companyID AND (ProjectName LIKE :searchTermWildcard OR CustomerName LIKE :searchTermWildcard) LIMIT :limit OFFSET :offset';
+            $sql = 'SELECT * FROM Customers WHERE CompanyID = :companyID AND (FirstName LIKE :searchTermWildcard OR LastName LIKE :searchTermWildcard) LIMIT :limit OFFSET :offset';
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':companyID', $company_id, PDO::PARAM_INT);
             $stmt->bindParam(':searchTermWildcard', $searchTermWildcard, PDO::PARAM_STR);
@@ -82,8 +82,10 @@ function getRecords($conn, $items_per_page, $offset, $company_id, $searchTerm = 
         error_log('Error en getRecords: ' . $e->getMessage());
         return [];
     }
+
     
 }
+
 
 $company_id = getCompanyID($conn, $user); 
 $total_items = countAllRecords($conn, $company_id); 

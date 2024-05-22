@@ -5,7 +5,7 @@
         header("location: login.php");
     }
     require '../conexion.php'; 
-    include '../BudgetOPs/pageBudget.php';
+    include '../projectsOPs/searchProjects.php';
 
     $nombreUsuario = $_SESSION['user'];
 
@@ -31,12 +31,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupuestos</title>
+    <title>Proyectos</title>
     <link rel="shortcut icon" href="../../imagenes/Logos/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="../../css/headerDashBoardFocus.css">
-    <link rel="stylesheet" href="../../css/presupuestosPage.css">
+    <link rel="stylesheet" href="../../css/projectsPage.css">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -88,7 +88,7 @@
 
     <div class="facturas">
         <div class="facturas-container">
-            <h5>Presupuestos</h5>
+            <h5>Proyectos</h5>
                 <nav class="navbar navbar-light">
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search"id="searchInput">
@@ -112,16 +112,20 @@
                             Cliente
                         </th>
                         <th class="text-center">
-                            <i class="fa-solid fa-calendar mx-1"></i>
-                            Fecha Emisión
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            Prioridad
                         </th>
                         <th class="text-center">
                             <i class="fa-solid fa-calendar-xmark mx-1"></i>
-                            Fecha expiración
+                            Fecha Límite
                         </th>
                         <th class="text-center">
                             <i class="fa-solid fa-spinner mx-1"></i>
                             Estado
+                        </th>
+                        <th class="text-center">
+                            <i class="fa-solid fa-location-pin mx-1"></i>
+                            Ubicación
                         </th>
                         <th class="text-center">
                             <i class="fa-solid fa-ellipsis-vertical mx-1"></i>
@@ -132,23 +136,25 @@
                     <tbody id="budgetsTbody">
                         <?php
                             foreach($records as $resultado){
-                                $budgetID = $resultado['BudgetID'];
+                                $projectID = $resultado['ProjectID'];
                                 $projectName = $resultado['ProjectName']; 
                                 $customerName = $resultado['CustomerName']; 
-                                $issue_date = $resultado['BudgetEmissionDate'];
-                                $exp_date = $resultado['BudgetValidityDate'];
-                                $estadoPresupuesto = $resultado['BudgetStatus'];
+                                $projectPriority = $resultado['ProjectPriority'];
+                                $exp_date = $resultado['EndDate'];
+                                $projectLocation = $resultado['Place'];
+                                $estadoPresupuesto = $resultado['ProjectStatus'];
 
                                 echo '<tr class="filaTablaReforma px-2 border-bottom">';
                                     echo '<td>' .$projectName. '</td>';
                                     echo '<td>' .$customerName.'</td>';
-                                    echo '<td class="text-center">' .$issue_date. '</td>';
+                                    echo '<td class="text-center d-flex align-items-center"> <p class="prioridad-'.$projectPriority.'">' .$projectPriority. '</p></td>';
                                     echo '<td class="text-center">' .$exp_date. '</td>';
                                     echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$estadoPresupuesto.'">' .$estadoPresupuesto. '</p></td>';
+                                    echo '<td class="text-center">' .$projectLocation. '</td>';
                                     echo '<td>
                                             <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $budgetID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $projectID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$projectID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
                             }
@@ -213,6 +219,7 @@
     </div> -->
         </div>
     </div>
-    <script src="../../js/Budget/searchBudget.js"></script>
+    <script src="../../js/Project/searchProject.js"></script>
+    <script src="../../js/Project/projectsInterfacePage.js"></script>
 </body>
 </html>
