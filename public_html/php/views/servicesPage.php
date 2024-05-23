@@ -5,7 +5,7 @@
         header("location: login.php");
     }
     require '../conexion.php'; 
-    include '../BillsOPs/searchBills.php';
+    include '../ServicesOPs/searchServices.php';
 
     $nombreUsuario = $_SESSION['user'];
 
@@ -31,12 +31,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturas</title>
+    <title>Presupuestos</title>
     <link rel="shortcut icon" href="../../imagenes/Logos/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="../../css/headerDashBoardFocus.css">
-    <link rel="stylesheet" href="../../css/billPage.css">
+    <link rel="stylesheet" href="../../css/servicesPage.css">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -88,7 +88,7 @@
 
     <div class="facturas">
         <div class="facturas-container">
-            <h5>Facturas</h5>
+            <h5>Presupuestos</h5>
                 <nav class="navbar navbar-light">
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search"id="searchInput">
@@ -104,24 +104,20 @@
                 <thead>
                     <tr class="filaTablaReforma rounded-top-2 px-2 border-bottom" id="tableHeader">
                         <th>
-                            <i class="fa-solid fa-folder-open mx-1"></i>
-                            Número de factura
+                            <i class="fa-regular fa-file-lines mx-1"></i>
+                            Nombre
                         </th>
                         <th>
-                            <i class="fa-solid fa-folder-open mx-1"></i>
-                            Nombre del Proyecto
-                        </th>
-                        <th>
-                            <i class="fa-solid fa-user mx-1"></i>
-                            Cliente
+                            <i class="fa-regular fa-file-lines mx-1"></i>
+                            Descripción
                         </th>
                         <th class="text-center">
-                            <i class="fa-solid fa-calendar-xmark mx-1"></i>
-                            Fecha expiración
+                            <i class="fa-solid fa-euro-sign mx-1"></i>
+                            Precion
                         </th>
                         <th class="text-center">
-                            <i class="fa-solid fa-spinner mx-1"></i>
-                            Estado
+                            <i class="fa-regular fa-hourglass-half mx-1"></i>
+                            Formato
                         </th>
                         <th class="text-center">
                             <i class="fa-solid fa-ellipsis-vertical mx-1"></i>
@@ -132,23 +128,21 @@
                     <tbody id="budgetsTbody">
                         <?php
                             foreach($records as $resultado){
-                                $billID = $resultado['BillID'];
-                                $billNumber = $resultado['billNumber'];
-                                $projectName = $resultado['ProjectName']; 
-                                $customerName = $resultado['CustomerName']; 
-                                $exp_date = $resultado['BillDueDate'];
-                                $billStatus = $resultado['BillStatus'];
+                                $serviceID = $resultado['ServiceID'];
+                                $serviceName = $resultado['ServiceName']; 
+                                $serviceDescription = $resultado['ServiceDescription']; 
+                                $unitPrice = $resultado['UnitPrice'];
+                                $unitFormat = $resultado['UnitFormat'];
 
                                 echo '<tr class="filaTablaReforma px-2 border-bottom">';
-                                    echo '<td>' .$billNumber. '</td>';
-                                    echo '<td>' .$projectName. '</td>';
-                                    echo '<td>' .$customerName.'</td>';
-                                    echo '<td class="text-center">' .$exp_date. '</td>';
-                                    echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$billStatus.'">' .$billStatus. '</p></td>';
+                                    echo '<td>' .$serviceName. '</td>';
+                                    echo '<td>' .$serviceDescription.'</td>';
+                                    echo '<td class="text-center">' .$unitPrice. '</td>';
+                                    echo '<td class="text-center">' .$unitFormat. '</td>';
                                     echo '<td>
                                             <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $billID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$billID. '"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $serviceID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$serviceID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
                             }
@@ -213,6 +207,6 @@
     </div> -->
         </div>
     </div>
-    <script src="../../js/Bill/searchBill.js"></script>
+    <script src="../../js/Service/searchService.js"></script>
 </body>
 </html>

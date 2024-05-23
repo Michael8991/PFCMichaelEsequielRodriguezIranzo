@@ -144,6 +144,18 @@
                             <p>Proyectos</p>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="botonesNavegador" href="servicesPage.php">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <p>Servicios</p>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="botonesNavegador" href="suppliersPage.php">
+                            <i class="fa-solid fa-truck-field"></i>
+                            <p>Proveedores</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

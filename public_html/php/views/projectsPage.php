@@ -68,9 +68,10 @@
                 <div class="dropdown-content">
                     <a href="dashboardHome.php"><i class="fa-solid fa-house"></i> Inicio</a>
                     <a href="dashboardPage.php"><i class="fa-solid fa-gauge-high"></i> DashBoard</a>
-                    <a href="factuasPage.php"><i class="fa-solid fa-file-invoice-dollar"></i> Facturas</a>
-                    <a href="projectsPage.php"><i class="fa-solid fa-folder-open"></i> Proyectos</a>
+                    <a href="facturasPage.php"><i class="fa-solid fa-file-invoice-dollar"></i> Facturas</a>
                     <a href="presupuestosPage.php"><i class="fa-solid fa-clipboard-list"></i> Presupuestos</a>
+                    <a href="presupuestosPage.php"><i class="fa-solid fa-users"></i> Clientes</a>
+                    <a href="presupuestosPage.php"><i class="fa-solid fa-briefcase"></i> Servicios</a>
                     <a href="controlGaleria.php"><i class="fa-regular fa-images"></i> Galería</a>
                     <a href="https://mail.hostinger.com/"><i class="fa-solid fa-envelope"></i> Mensajes</a>
                     <a href="calendarioPage.php"><i class="fa-solid fa-house"></i> Calendario</a>
@@ -92,10 +93,9 @@
                 <nav class="navbar navbar-light">
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search"id="searchInput">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
                     </form>
                     <div class="aniadirElementoButton">
-                        <a class="aniadirElementoButtonContainer" href="aniadirPresupuestoPage.php">
+                        <a class="aniadirElementoButtonContainer" href="addProjectPage.php">
                             Añadir
                         </a>
                     </div>
