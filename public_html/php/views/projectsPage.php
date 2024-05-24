@@ -163,9 +163,8 @@
                                     echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$estadoPresupuesto.'">' .$estadoPresupuesto. '</p></td>';
                                     echo '<td class="text-center">' .$projectLocation. '</td>';
                                     echo '<td>
-                                            <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="projectDetails.php?id=' . $projectID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$projectID. '"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="editar ms-auto me-2 text-success" href="projectDetails.php?id=' . $projectID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" id="deleteProjectInput" onclick="deleteProject(' .$projectID. ')" data-id="' .$projectID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
                             }
@@ -174,52 +173,44 @@
                 </table>
 
                 <nav class="justify-content-center">
-                <ul class="pagination pagination-sm">
-                    <?php if ($page > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page - 1; ?>" tabindex="-1">Anterior</a>
-                        </li>
-                    <?php endif; ?>
+                    <ul class="pagination pagination-sm">
+                        <?php if ($page > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page - 1; ?>" tabindex="-1">Anterior</a>
+                            </li>
+                        <?php endif; ?>
 
-                    <?php
-                    $range = 3;
-                    $start = max(1, $page - $range);
-                    $end = min($total_pages, $page + $range);
+                        <?php
+                        $range = 3;
+                        $start = max(1, $page - $range);
+                        $end = min($total_pages, $page + $range);
 
-                    for ($i = $start; $i <= $end; $i++): ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'activePag' : ''; ?>">
-                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
+                        for ($i = $start; $i <= $end; $i++): ?>
+                            <li class="page-item <?php echo ($i == $page) ? 'activePag' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
 
-                    <?php if ($page < $total_pages): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-
-
-                <!-- </ul> -->
+                        <?php if ($page < $total_pages): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
             </div>
         </div>
-        <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Launch demo modal
-    </button> -->
 
 <!-- Modal -->
-    <!-- <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="deleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este elemento?</h6>
+                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este elemento? Eliminarás sus presupuestos y facturas</h6>
                 </div>
                 
                 <div class="modal-footer">
-                    <form id="confirmarEliminarForm" action="operacionEliminarElementoGaleria.php" method="POST">
-                        Campo oculto para almacenar el ID del elemento a eliminar 
+                    <form id="confirmarEliminarForm" action="../ProjectsOPs/deleteProject.php" method="POST">
                         <input type="hidden" id="elementoIdInput" name="elemento_id" value="">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -227,10 +218,11 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
         </div>
     </div>
     <script src="../../js/Project/searchProject.js"></script>
     <script src="../../js/Project/projectsInterfacePage.js"></script>
+    <script src="../../js/Project/deleteProject.js"></script>
 </body>
 </html>
