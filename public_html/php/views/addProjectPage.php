@@ -28,7 +28,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Añadir Presupuesto</title>
+    <title>Añadir Proyecto</title>
     <link rel="shortcut icon" href="../../imagenes/Logos/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -124,11 +124,11 @@ try {
     <div class="home">
     
         <div class="header-title mx-auto my-3" style="width:70%; position:relative;">
-            <h2>Crear presupuesto</h2>
+            <h2>Crear proyecto</h2>
         </div>
         <div class="home-container">    
             <div class="form-container">
-                <form class="addBudgetForm" id="addBudgetForm" action="../BudgetOPs/insertBudget.php" method="POST">
+                <form class="addBudgetForm" id="addProjectForm" action="../ProjectsOPs/insertProject.php" method="POST">
                     <div class="section-form" id="generalDatasSection">
                         <h5>Datos generales  <?php $nombreUsuario = $_SESSION['user']; echo "<p style='color:grey; font-size:15px;'> Creado por: <i>" .$nombreUsuario. " </i> </p>"  ?></h5>
                         <div class="rowBudget">
@@ -139,121 +139,41 @@ try {
                             <input type="date" class="form-control" id="fechaValidez" name="fechaValidezInput" required>
                         </div>
                         <div class="rowBudget">
-                            <label for="searchProjectName">Proyecto:</label>
-                            <input autocomplete="off" class="form-control search-box" type="text" id="projectInputName" placeholder="Seleccione un proyecto" Disabled readonly>
-                            <input autocomplete="off" type="text" name="projectInputID" id="projectInputID" hidden>
                             <label for="searchCustomerInput">Cliente:</label>
-                            <input autocomplete="off" class="form-control search-box" type="text" name="searchCustomerInput" id="searchCustomerInput" Disabled readonly>
-                            <button type="button" class="btn btn-primary btn-success" data-toggle="modal"  id="openBtnModalProjects" onclick="openProjectsModal()">Seleccionar proyecto</button>
+                            <input autocomplete="off" type="text" name="customerInputID" id="customerInputID" hidden>
+                            <input autocomplete="off" class="form-control search-box w-50" type="text" name="searchCustomerInput" id="searchCustomerInput" Disabled readonly>
+                            <button type="button" class="btn btn-primary btn-success" data-toggle="modal"  id="openCustomersModalBtn" onclick="openCustomersModal()">Seleccionar cliente</button>
                         </div>
-                    </div>
-                    <div class="section-form">
-                        <h5>Tabla de servicios y costes</h5>
-                        <table class="budgetTable" style="width:100%;">
-                            <tr class="">
-                                <th class="text-center">Descripción</th>
-                                <th class="text-center">Importe</th>
-                                <th class="text-center">Acciones</th>
-                            </tr>
-                            <tr id="parentAddBtn">
-                                <td colspan="3">
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <button type="button" class="addRowButton btn btn-success mx-2" onclick="addRowBudget(event)">Agregar materiales</button>
-                                        <button type="button" class="addRowButton btn btn-success mx-2" onclick="openServicesModal()" id="openServicesModalBtn">Agregar servicio</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text rounded-end-0 " id="">Total</span>
-                                        </div>
-                                        <input name="totalAmountBudget" type="number" class="form-control" readonly placeholder="0,00" id="totalBudgetInput">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text rounded-start-0" id="">Є</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="section-form">
-                        <h5>Terminos del presupuesto</h5>
-                        <br>
+                        <div class="rowBudget">
+                            <label for="proyectNameInput">Nombre del proyecto:</label>
+                            <input autocomplete="off" class="form-control search-box w-50" type="text" name="proyectNameInput" id="proyectNameInput">
+                        </div>
                         <div class="rowBudget">
                             <div class="form-floating" style="width: 100% !important">
-                                <textarea name="floatingTextarea2" class="form-control col-12" placeholder="Introduce los materiales no incluidos" id="floatingTextarea2" style="height: 100px;"></textarea>
-                                <label for="floatingTextarea2">Materiales no incluidos</label>
+                                <textarea name="floatingTextarea2" class="form-control col-12" placeholder="Introduce las descripción del proyecto" id="floatingTextarea2" style="height: 100px;"></textarea>
+                                <label for="floatingTextarea2">Descripción del proyecto</label>
                             </div>
                         </div>
-                        <br>
                         <div class="rowBudget">
-                            <label for="TAXincluded">IVA incluido:</label>
-                            <div class="form-check">
-                                <input value="Si" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedYes">
-                                <label class="form-check-label" for="TAXincludedYes">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input value="No" class="form-check-input" type="radio" name="TAXincluded" id="TAXincludedNo" checked>
-                                <label class="form-check-label" for="TAXincludedNo">
-                                    No
-                                </label>
-                            </div>
+                            <label for="proyectPlaceInput">Ubicación del proyecto:</label>
+                            <input autocomplete="off" class="form-control search-box w-50" type="text" name="proyectPlaceInput" id="proyectPlaceInput">
                         </div>
-                        <br>
                         <div class="rowBudget">
-                            <label for="BuildingPermits">Permiso de obra es resoposabilidad del cliente:</label>
-                            <div class="form-check">
-                                <input value="Si" class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsYes" checked>
-                                <label class="form-check-label" for="BuildingPermitsYes">
-                                    Sí
-                                </label>
-                            </div>
-                            <div value="No" class="form-check">
-                                <input class="form-check-input" type="radio" name="BuildingPermits" id="BuildingPermitsNo">
-                                <label class="form-check-label" for="BuildingPermitsYes">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                        <br>
-                        <h6>Terminos de pago</h6>
-                        <p>Porcentajes de pago sobre el total:</p>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text rounded-end-0">Al aceptar el presupuesto:</span>
-                            </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentUponAccepting">
-                            <div class="input-group-append">
-                                <span class="input-group-text rounded-start-0">%</span>
-                            </div>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text rounded-end-0">En el proceso de obras:</span>
-                            </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentInProcess">
-                            <div class="input-group-append">
-                                <span class="input-group-text rounded-start-0">%</span>
-                            </div>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text rounded-end-0">Al finalizar el proyecto:</span>
-                            </div>
-                            <input type="number" class="form-control percentageBudget" name="paymentAtTheEnd">
-                            <div class="input-group-append">
-                                <span class="input-group-text rounded-start-0">%</span>
-                            </div>
+                            <label for="proyectPriorityInput">Prioridad del proyecto:</label>
+                            <select name="proyectPriorityInput" class="form-select mb-3" aria-label="Large select example">
+                                <option selected>Seleccione la prioridad</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Media">Media</option>
+                                <option value="Baja">Baja</option>
+                            </select>
                         </div>
                     </div>
+
                     <div class="rowBudget" style="z-index:2;">
                         <button type="button" class="btn btn-primary btn-success" id="btnSubmitBudgetForm" onclick="openSaveModal()" data-toggle="modal">Guardar</button>
                         <button type="button" class="btn btn-secondary btn-danger" data-toggle="modal" onclick="openCancelModal()">Cancelar</button>
                     </div>
+                    
                 </form>
 
                 <div class="modal fade " id="projectsModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -502,7 +422,7 @@ try {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeSaveModal()">Continuar</button>
-                                <button type="submit" class="btn btn-primary btn-success" form="addBudgetForm">Aceptar</button>
+                                <button type="submit" class="btn btn-primary btn-success" form="addProjectForm">Aceptar</button>
                             </div>
                         </div>
                     </div>
@@ -527,11 +447,8 @@ try {
             </div>
         </div>
     </div>
-    <script src="../../js/Budget/addBudget.js"></script>
-    <script src="../../js/Budget/searchCustomerBudget.js"></script>
-    <script src="../../js/Budget/searchProjectBudget.js"></script>
-    <script src="../../js/Budget/validationsBudget.js"></script>
-    <script src="../../js/Budget/tableBudget.js"></script>
-    <script src="../../js/Budget/searchServiceBudget.js"></script>
+    <script src="../../js/Project/addProject.js"></script>
+    <script src="../../js/Project/searchCustomerProject.js"></script>
+    <script src="../../js/Project/validationsProject.js"></script>
 </body>
 </html>

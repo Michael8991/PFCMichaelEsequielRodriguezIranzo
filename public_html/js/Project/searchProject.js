@@ -1,3 +1,14 @@
+function truncateString(string, length = 25, trailing = '...') {
+    // Si la longitud del string es mayor que el límite definido
+    if (string.length > length) {
+        // Truncar el string al límite y agregar el sufijo
+        return string.substring(0, length - trailing.length) + trailing;
+    } else {
+        // Si no es mayor, devolver el string tal cual
+        return string;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var searchInput = document.getElementById('searchInput');
 
@@ -28,18 +39,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Crear una fila de la tabla para cada registro
                         const row = document.createElement('tr');
                         row.classList.add('filaTablaReforma', 'px-2', 'border-bottom');
-
+                        let projectName = truncateString(record.ProjectName, 30);
+                        let customerName = truncateString(record.CustomerName, 30);
+                        let projectPlace = truncateString(record.Place, 25);
                         // Crear las celdas para cada campo del registro
                         row.innerHTML = `
-                            <td>${record.ProjectName}</td>
-                            <td>${record.CustomerName}</td>
+                            <td>${projectName}</td>
+                            <td>${customerName}</td>
                             <td class="text-center">${record.ProjectPriority}</td>
                             <td class="text-center">${record.EndDate}</td>
                             <td class="text-center d-flex align-items-center"> <p class="estado-${record.ProjectStatus}">${record.ProjectStatus}</p></td>
-                            <td class="text-center">${record.Place}</td>
+                            <td class="text-center">${projectPlace}</td>
                             <td>
                                 <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a>
-                                <a class="editar mx-auto text-success" href="budgetDetails.php?id=${record.ProjectID}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a class="editar mx-auto text-success" href="projectDetails.php?id=${record.ProjectID}"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="${record.ProjectID}"><i class="fa-solid fa-trash"></i></a>
                             </td>`;
 

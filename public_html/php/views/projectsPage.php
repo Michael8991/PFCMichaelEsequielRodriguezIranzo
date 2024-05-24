@@ -24,6 +24,17 @@
     }else{
         echo "error de usuario";
     }
+
+    function truncateString($string, $length = 25, $trailing = '...') {
+        // Si la longitud del string es mayor que el límite definido
+        if (strlen($string) > $length) {
+            // Truncar el string a 23 caracteres y agregar el sufijo
+            return substr($string, 0, $length - strlen($trailing)) . $trailing;
+        } else {
+            // Si no es mayor, devolver el string tal cual
+            return $string;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -137,11 +148,11 @@
                         <?php
                             foreach($records as $resultado){
                                 $projectID = $resultado['ProjectID'];
-                                $projectName = $resultado['ProjectName']; 
-                                $customerName = $resultado['CustomerName']; 
+                                $projectName = truncateString($resultado['ProjectName'], 30); 
+                                $customerName = truncateString($resultado['CustomerName'], 30); 
                                 $projectPriority = $resultado['ProjectPriority'];
                                 $exp_date = $resultado['EndDate'];
-                                $projectLocation = $resultado['Place'];
+                                $projectLocation = truncateString($resultado['Place'], 25);
                                 $estadoPresupuesto = $resultado['ProjectStatus'];
 
                                 echo '<tr class="filaTablaReforma px-2 border-bottom">';
@@ -153,7 +164,7 @@
                                     echo '<td class="text-center">' .$projectLocation. '</td>';
                                     echo '<td>
                                             <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $projectID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="editar mx-auto text-success" href="projectDetails.php?id=' . $projectID . '"><i class="fa-regular fa-pen-to-square"></i></a>
                                             <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$projectID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
