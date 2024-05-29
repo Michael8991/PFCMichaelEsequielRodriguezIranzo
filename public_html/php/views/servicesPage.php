@@ -31,7 +31,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupuestos</title>
+    <title>Servicios</title>
     <link rel="shortcut icon" href="../../imagenes/Logos/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -88,14 +88,14 @@
 
     <div class="facturas">
         <div class="facturas-container">
-            <h5>Presupuestos</h5>
+            <h5>Servicios</h5>
                 <nav class="navbar navbar-light">
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search"id="searchInput">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
                     </form>
                     <div class="aniadirElementoButton">
-                        <a class="aniadirElementoButtonContainer" href="aniadirPresupuestoPage.php">
+                        <a class="aniadirElementoButtonContainer" href="addServicePage.php">
                             Añadir
                         </a>
                     </div>
@@ -140,7 +140,7 @@
                                     echo '<td class="text-center">' .$unitPrice. '</td>';
                                     echo '<td class="text-center">' .$unitFormat. '</td>';
                                     echo '<td>
-                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $serviceID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="editar mx-auto text-success" href="serviceDetails.php?id=' . $serviceID . '"><i class="fa-regular fa-pen-to-square"></i></a>
                                             <a class="borrar me-auto ms-2 text-danger" onclick="deleteService(' .$serviceID. ')" data-id="' .$serviceID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
