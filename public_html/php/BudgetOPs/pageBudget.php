@@ -56,7 +56,7 @@ function getRecords($conn, $items_per_page, $offset, $company_id, $searchTerm = 
     try {
 
         if (empty($searchTerm)) {
-            $sql = 'SELECT * FROM Budgets WHERE CompanyID = :companyID LIMIT :limit OFFSET :offset';
+            $sql = 'SELECT * FROM Budgets LEFT JOIN budgetsPDFs ON Budgets.BudgetID = budgetsPDFs.budget_id WHERE CompanyID = :companyID LIMIT :limit OFFSET :offset';
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':companyID', $company_id, PDO::PARAM_INT);
             $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);

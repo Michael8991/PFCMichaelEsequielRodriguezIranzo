@@ -140,9 +140,8 @@
                                     echo '<td class="text-center">' .$unitPrice. '</td>';
                                     echo '<td class="text-center">' .$unitFormat. '</td>';
                                     echo '<td>
-                                            <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
                                             <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $serviceID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$serviceID. '"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" onclick="deleteService(' .$serviceID. ')" data-id="' .$serviceID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
                             }
@@ -176,27 +175,18 @@
                     <?php endif; ?>
                 </ul>
             </nav>
-
-
-                <!-- </ul> -->
             </div>
         </div>
-        <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Launch demo modal
-    </button> -->
-
 <!-- Modal -->
-    <!-- <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este elemento?</h6>
+                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este servicio?</h6>
                 </div>
                 
                 <div class="modal-footer">
-                    <form id="confirmarEliminarForm" action="operacionEliminarElementoGaleria.php" method="POST">
-                        Campo oculto para almacenar el ID del elemento a eliminar 
+                    <form id="confirmarEliminarForm" action="../ServicesOPs/deleteService.php" method="POST">
                         <input type="hidden" id="elementoIdInput" name="elemento_id" value="">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -204,9 +194,10 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
         </div>
     </div>
     <script src="../../js/Service/searchService.js"></script>
+    <script src="../../js/Service/deleteService.js"></script>
 </body>
 </html>

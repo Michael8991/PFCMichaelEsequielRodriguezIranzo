@@ -138,6 +138,8 @@
                                 $issue_date = $resultado['BudgetEmissionDate'];
                                 $exp_date = $resultado['BudgetValidityDate'];
                                 $estadoPresupuesto = $resultado['BudgetStatus'];
+                                $ubicacionPDF  = $resultado['ubicacionPDF'];
+                                // if ($row['ubicacion'] !== null) {
 
                                 echo '<tr class="filaTablaReforma px-2 border-bottom">';
                                     echo '<td>' .$projectName. '</td>';
@@ -145,10 +147,14 @@
                                     echo '<td class="text-center">' .$issue_date. '</td>';
                                     echo '<td class="text-center">' .$exp_date. '</td>';
                                     echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$estadoPresupuesto.'">' .$estadoPresupuesto. '</p></td>';
-                                    echo '<td>
-                                            <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $budgetID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
+                                    echo '<td>';
+                                    if ($ubicacionPDF !== null) {
+                                        echo  '<a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file-pdf"></i></a>';
+                                    }else{
+                                        echo    '<a class="budgetPDF ms-auto me-2 text-secondary" onclick="generatePDFBudget('.$budgetID.')"><i class="fa-solid fa-file"></i></a>';
+                                    }
+                                    echo    '<a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $budgetID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(' .$budgetID. ')" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
                                             </td>';
                                 echo '</tr>';
                             }
@@ -182,27 +188,36 @@
                     <?php endif; ?>
                 </ul>
             </nav>
-
-
-                <!-- </ul> -->
             </div>
         </div>
-        <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Launch demo modal
-    </button> -->
 
-<!-- Modal -->
-    <!-- <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <!-- Modal -->
+            <div class="modal fade" id="generatePDFModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres crear el PDF?</h6>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <form id="generetaPDFForm" action="../BudgetOPs/loadPDF.php" method="POST">
+                                <input type="hidden" id="id" name="id" value="">
+                                <button type="submit" class="btn btn-primary">Crear</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este elemento?</h6>
+                    <h6class="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres eliminar este elemento? Eliminará su pdf correspondiente.</h6>
                 </div>
                 
                 <div class="modal-footer">
-                    <form id="confirmarEliminarForm" action="operacionEliminarElementoGaleria.php" method="POST">
-                        Campo oculto para almacenar el ID del elemento a eliminar 
+                    <form id="confirmarEliminarForm" action="../BudgetOPs/deleteBudget.php" method="POST">
                         <input type="hidden" id="elementoIdInput" name="elemento_id" value="">
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -210,9 +225,10 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
         </div>
     </div>
     <script src="../../js/Budget/searchBudget.js"></script>
+    <script src="../../js/Budget/deleteBudget.js"></script>
 </body>
 </html>

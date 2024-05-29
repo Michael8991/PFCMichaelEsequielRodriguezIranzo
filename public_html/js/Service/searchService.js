@@ -36,9 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td class="text-center">${record.UnitPrice}</td>
                             <td class="text-center">${record.UnitFormat}</td>
                             <td>
-                                <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a>
                                 <a class="editar mx-auto text-success" href="budgetDetails.php?id=${record.ServiceID}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="${record.ServiceID}"><i class="fa-solid fa-trash"></i></a>
+                                <a class="borrar me-auto ms-2 text-danger" onclick="deleteService(${record.ServiceID})" data-id="${record.ServiceID}"><i class="fa-solid fa-trash"></i></a>
                             </td>`;
 
                         // Agregar la fila a la tabla

@@ -1,0 +1,59 @@
+@media print{
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: lighter;
+    }
+    
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.invoce-container{
+    max-width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.invoce-logo{
+    height: 250px;
+}
+
+.table tr{
+    height: fit-content !important;
+}
+.dates-table tr th, .companies-table tr th{
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.dates-table tr{
+    border-bottom: 5px solid;
+}
+.companies-table tr{
+    border-bottom: 0px transparent !important;
+}
+.companies-table{
+    border-right: 5px solid;
+}
+
+.items-table{
+    border: 0px transparent;
+    background-color: rgba(251, 98, 98, 0.689);
+}
+/* .items-table thead tr{
+   
+} */
+
+.items-table thead tr th{
+    background-color: transparent;
+}
+
+.total-amount{
+    border-top: 5px solid rgba(251, 98, 98, 0.689);
+    border-bottom: 0px solid transparent;
+}

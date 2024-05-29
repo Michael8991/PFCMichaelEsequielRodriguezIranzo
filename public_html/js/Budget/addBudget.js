@@ -1,3 +1,4 @@
+
 function openProjectsModal() {
     $('#projectsModal').modal('show');
 }

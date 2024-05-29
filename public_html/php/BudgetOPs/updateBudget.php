@@ -38,7 +38,7 @@
                 $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $company_id_budget = $row[0]['CompanyID'];
             }
-            if($company_id != $company_id){
+            if($company_id_budget != $company_id){
                 $error_id_budget_update = 'Ha habido un error con el presupuesto. Intentelo de nuevo.';
                 echo $error_id_Budget_Update;
             }
@@ -220,7 +220,15 @@
 
         try{
             if(!$elementosAntiguos){
-                //borramos todo
+                try{
+                    $sqlDelete = "DELETE FROM Budgets WHERE BudgetID = :budget_id";
+                    $stmt = $conn->prepare($sqlDelete);
+                    $stmt->bindParam(":budget_id", $budget_id, PDO::PARAM_INT);
+                    $stmt->execute();
+
+                }catch(PDOException $e){
+                    echo 'Error al borrar todos los items'.$e->getMessage();
+                }
             }else{
                 if($oldMaterialsBD){
                     foreach($oldMaterialsBD as $oldMaterial){

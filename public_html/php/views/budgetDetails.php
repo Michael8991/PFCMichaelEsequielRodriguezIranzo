@@ -3,12 +3,24 @@
 
     if (!isset($_SESSION['user'])) {
         header("location: login.php");
+        exit;
     }
     require '../conexion.php'; // Incluir el archivo de conexión
 
     $nombreUsuario = $_SESSION['user'];
 
     $budget_id = $_GET['id'];
+    try{
+        $sqlSelectCompanyID = "SELECT CompanyID FROM Users WHERE user = :userName";
+        $stmt = $conn->prepare($sqlSelectCompanyID);
+        $stmt->bindParam(":userName", $nombreUsuario, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $company_user = $resultado['CompanyID'];
+    }catch(PDOException $e){
+        echo 'Error'.$e->getMessage();
+    }
 
     try {
         // Consulta SQL
@@ -69,6 +81,11 @@
         $buildingPermit = $resultado['buildingPermit'];
 
         $creator_user = $resultado['user'];
+        $company_budget_id = $resultado['CompanyID'];
+    }
+    if($company_budget_id != $company_user){
+        header("location: ../views/presupuestosPage.php");
+        exit;
     }
 ?>
 <!DOCTYPE html>

@@ -63,7 +63,7 @@
 
         //Validación de que el proyecto pertenece al usuario.
         try{
-            $sql = "SELECT CompanyID FROM Projects Where ProjectID = :project_id";
+            $sql = "SELECT CompanyID, CustomerID, CustomerName, ProjectName FROM Projects Where ProjectID = :project_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":project_id", $project_id, PDO::PARAM_STR);
             $stmt->execute();
@@ -77,6 +77,10 @@
         if($company_id_check !== $company_id){
             $project_id_error = "El proyecto no existe. Compañía del usuario" . $company_id; 
             echo $project_id_error;
+        }else{
+            $project_name = $row[0]['ProjectName'];
+            $customer_name = $row[0]['CustomerName'];
+            $customer_id = $row[0]['CustomerID'];
         }
         
         //Validación tabla de materiales y servicios.
@@ -127,8 +131,8 @@
         }
         $materials_not_included = $_POST["floatingTextarea2"];
         try{
-            $sqlInsertionBudget = "INSERT INTO Budgets (BudgetEmissionDate, BudgetStatus, BudgetCreatorUserID, BudgetTotalAmount, BudgetValidityDate, ProjectID, CompanyID, paymentAtTheEnd, paymentInProcess, paymentUponAccepting, materialsNotIncluded, IVA, buildingPermit) 
-            VALUES (:BudgetEmissionDate, :BudgetStatus, :BudgetCreatorUserID, :BudgetTotalAmount, :BudgetValidityDate, :ProjectID, :CompanyID, :paymentAtTheEnd, :paymentInProcess, :paymentUponAccepting, :materialsNotIncluded, :IVA, :buildingPermit) ";
+            $sqlInsertionBudget = "INSERT INTO Budgets (BudgetEmissionDate, BudgetStatus, BudgetCreatorUserID, BudgetTotalAmount, BudgetValidityDate, ProjectID, ProjectName, CustomerID, CustomerName, CompanyID, paymentAtTheEnd, paymentInProcess, paymentUponAccepting, materialsNotIncluded, IVA, buildingPermit) 
+            VALUES (:BudgetEmissionDate, :BudgetStatus, :BudgetCreatorUserID, :BudgetTotalAmount, :BudgetValidityDate, :ProjectID, :ProjectName, :CustomerID, :CustomerName,  :CompanyID, :paymentAtTheEnd, :paymentInProcess, :paymentUponAccepting, :materialsNotIncluded, :IVA, :buildingPermit) ";
             $stmt =  $conn->prepare($sqlInsertionBudget);
             // Vincular parámetros
             $stmt->bindParam(':BudgetEmissionDate', $issue_date);
@@ -137,7 +141,10 @@
             $stmt->bindParam(':BudgetTotalAmount', $total_amount);
             $stmt->bindParam(':BudgetValidityDate', $exp_date);
             $stmt->bindParam(':ProjectID', $project_id);
+            $stmt->bindParam(':ProjectName', $project_name);
             $stmt->bindParam(':CompanyID', $company_id);
+            $stmt->bindParam(':CustomerID', $customer_id);
+            $stmt->bindParam(':CustomerName', $customer_name);
             $stmt->bindParam(':paymentAtTheEnd', $paymentAtTheEnd);
             $stmt->bindParam(':paymentInProcess', $paymentInProcess);
             $stmt->bindParam(':paymentUponAccepting', $paymentUponAccepting);
@@ -146,11 +153,16 @@
             $stmt->bindParam(':buildingPermit', $building_permit);
 
             $stmt->execute();
+
+            $budget_id = $conn->lastInsertId();
+
         }catch(PDOException $e){
             echo 'Error inserción de Presupuesto: ' . $e->getMessage();
         }
+
+
         try{
-            $sqlInsertionBudgetItems = "INSERT INTO budgetitems (Description, TotalPrice) VALUES (:ItemDescription, :ItemPrice)";
+            $sqlInsertionBudgetItems = "INSERT INTO budgetitems (BudgetID, Description, TotalPrice) VALUES (:budget_id :ItemDescription, :ItemPrice)";
 
             foreach($elementos as $elemento){
                 $ItemID = $elemento['campo1'];
@@ -160,6 +172,7 @@
                 $stmt = $conn->prepare($sqlInsertionBudgetItems);
                 $stmt->bindParam(":ItemDescription", $ItemDescription, PDO::PARAM_STR);
                 $stmt->bindParam(":ItemPrice", $ItemPrice, PDO::PARAM_STR);
+                $stmt->bindParam(":budget_id", $budget_id, PDO::PARAM_INT);
                 $stmt->execute();
             }
 

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>
                                 <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a>
                                 <a class="editar mx-auto text-success" href="budgetDetails.php?id=${record.BudgetID}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a class="borrar me-auto ms-2 text-danger" href="../js/dashBoard.js" data-id="${record.BudgetID}"><i class="fa-solid fa-trash"></i></a>
+                                <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(${record.BudgetID})" data-id="${record.BudgetID}"><i class="fa-solid fa-trash"></i></a>
                             </td>`;
 
                         // Agregar la fila a la tabla
@@ -59,3 +59,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function openGeneratePDFModal() {
+    $('#generatePDFModal').modal('show');
+}
+function closeGeneratePDFModal() {
+    $('#generatePDFModal').modal('hide');
+}
+
+function generatePDFBudget(id){
+    const elementoIdInput = document.getElementById('id');
+    $('#generatePDFModal').modal('show');
+            elementoIdInput.value = id;
+
+}
