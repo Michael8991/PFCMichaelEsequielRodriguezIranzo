@@ -148,17 +148,17 @@
                                     echo '<td class="text-center">' .$exp_date. '</td>';
                                     echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$estadoPresupuesto.'">' .$estadoPresupuesto. '</p></td>';
                                     echo '<td>';
-                                    if ($ubicacionPDF !== null) {
-                                        echo  '<a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file-pdf"></i></a>';
-                                    }else{
-                                        echo    '<a class="budgetPDF ms-auto me-2 text-secondary" onclick="generatePDFBudget('.$budgetID.')"><i class="fa-solid fa-file"></i></a>';
-                                    }
                                     echo    '<a class="editar mx-auto text-success" href="budgetDetails.php?id=' . $budgetID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(' .$budgetID. ')" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
-                                            </td>';
-                                echo '</tr>';
-                            }
-                        ?>
+                                    <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(' .$budgetID. ')" data-id="' .$budgetID. '"><i class="fa-solid fa-trash"></i></a>
+                                    </td>';
+                                    echo '</tr>';
+                                }
+                                ?>
+                                <!-- if ($ubicacionPDF !== null) {
+                                    echo  '<a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file-pdf"></i></a>';
+                                }else{
+                                    echo    '<a class="budgetPDF ms-auto me-2 text-secondary" onclick="generatePDFBudget('.$budgetID.')"><i class="fa-solid fa-file"></i></a>';
+                                } -->
                     </tbody>
                 </table>
 

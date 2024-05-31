@@ -176,36 +176,7 @@ try {
                     
                 </form>
 
-                <div class="modal fade " id="projectsModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 me-2" style="height:20px;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
-                                    </svg>
-                                    Proyectos
-                                </h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Buscar proyecto" id="searchProjectInput">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="openAddProjectModal()">Agregar proyecto</button>
-                                        <div class="input-group-text">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="height:20px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                            </svg>
-                                        </div>
-                                </div>
-                                <div id="projectDisplayer"></div>
-                            </div>
-                            <div class="modal-footer" id="modalFooterProjects">
-                                <button type="button" class="btn btn-success" id="confirmProjectBtn">Aceptar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeProjectsModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="modal fade " id="customersModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                         <div class="modal-content">
@@ -249,7 +220,7 @@ try {
                                 </h5>
                             </div>
                             <div class="modal-body">
-                                <form id="addCustomerForm" action="addCustomerOP.php" method="POST">
+                                <form id="addCustomerForm" action="../CustomersOps/insertCustomer.php" method="POST">
                                     <div class="mb-3">
                                         <label for="first_name" class="form-label">Nombre:</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" required>
@@ -279,137 +250,7 @@ try {
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="addProjectModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 me-2" style="height:20px;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
-                                    </svg>
-                                    Creación rápida de proyecto
-                                </h5>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addProjectForm" action="addProjectOP.php" method="POST">
-                                    <div class="mb-3">
-                                        <label for="projectName" class="form-label"><span class="required me-1">*</span>Nombre del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectName" name="projectName" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="projectDescription" class="form-label">Descripción del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectDescription" name="projectDescription">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="startDate" class="form-label">Fecha de Inicio:</label>
-                                        <input type="date" class="form-control" id="startDate" name="startDate">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="endDate" class="form-label">Fecha de Finalización:</label>
-                                        <input type="date" class="form-control" id="endDate" name="endDate">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="projectStatus" class="form-label">Estado del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectStatus" name="projectStatus">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="customerInputName" class="form-label"><span class="required me-1">*</span> Cliente:</label>
-                                        <input type="text" class="form-control" id="customerInputName" name="customerInputName" Disabled readonly required>
-                                        <input type="number" class="form-control" id="customerInputID" name="customerInputID" hidden required>
-                                        <div class="d-grid gap-2 mt-2">
-                                            <button class="btn btn-primary" type="button" onclick="openCustomersModal()" id="openCustomersModalBtn">Agregar cliente</button>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="projectPriority" class="form-label">Prioridad del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectPriority" name="projectPriority">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="location" class="form-label">Ubicación:</label>
-                                        <input type="text" class="form-control" id="location" name="location">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" form="addProjectForm">Aceptar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeAddProjectModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="modal fade " id="servicesModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 me-2" style="height:20px;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
-                                    </svg>
-                                    Servicios
-                                </h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Buscar servicio" id="browserServiceInput">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="openAddServicesModal()">Agregar servicio</button>
-                                        <div class="input-group-text">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="height:20px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                            </svg>
-                                        </div>
-                                </div>
-                                <div id="serviceDisplayer"></div>
-                            </div>
-                            <div class="modal-footer" id="modalFooterProjects">
-                                <button type="button" class="btn btn-success" id="confirmServiceBtn">Aceptar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeServicesModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="addServicesModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 me-2" style="height:20px;">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
-                                    </svg>
-                                    Creación rápida de servicio
-                                </h5>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addCustomerForm" action="addCustomerOP.php" method="POST">
-                                    <div class="mb-3">
-                                        <label for="first_name" class="form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="last_name" class="form-label">Descripción:</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Precio unidad:</label>
-                                        <input type="number" class="form-control" id="email" name="email">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="phone_number" class="form-label">Formato unidad:</label>
-                                        <select class="form-select" aria-label="Default select example" required>
-                                            <option selected>Seleccione un formato</option>
-                                            <option value="Jornal">Jornal</option>
-                                            <option value="Hora">Hora</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" form="addCustomerForm">Aceptar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeAddServicesModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="modal fade" id="confirmSaveModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">

@@ -37,14 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td class="text-center">${record.BudgetValidityDate}</td>
                             <td class="text-center d-flex align-items-center"> <p class="estado-${record.BudgetStatus}">${record.BudgetStatus}</p></td>
                             <td>
-                                <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a>
-                                <a class="editar mx-auto text-success" href="budgetDetails.php?id=${record.BudgetID}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(${record.BudgetID})" data-id="${record.BudgetID}"><i class="fa-solid fa-trash"></i></a>
+                            <a class="editar mx-auto text-success" href="budgetDetails.php?id=${record.BudgetID}"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="borrar me-auto ms-2 text-danger" onclick="deleteBudget(${record.BudgetID})" data-id="${record.BudgetID}"><i class="fa-solid fa-trash"></i></a>
                             </td>`;
+                            
+                            // Agregar la fila a la tabla
+                            budgetsTbody.appendChild(row);
 
-                        // Agregar la fila a la tabla
-                        budgetsTbody.appendChild(row);
-                    });
+                            // <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a>
+                        });
                 } else {
                     // La solicitud falló
                     console.error('Error en la solicitud AJAX:', xhr.statusText);

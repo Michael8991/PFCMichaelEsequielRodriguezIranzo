@@ -67,7 +67,7 @@
     }catch(PDOException $e){
         echo 'error'.$e->getMessage();
     }
-    header("Location: ../views/servicePage.php");
+    header("Location: ../views/servicesPage.php");
     exit;
         
 

@@ -146,12 +146,12 @@
                                     echo '<td class="text-center">' .$exp_date. '</td>';
                                     echo '<td class="text-center d-flex align-items-center"> <p class="estado-'.$billStatus.'">' .$billStatus. '</p></td>';
                                     echo '<td>
-                                            <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
-                                            <a class="editar mx-auto text-success" href="billDetails.php?id=' . $billID . '"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="borrar me-auto ms-2 text-danger" onclick="deleteBill(' .$billID. ')" data-id="' .$billID. '"><i class="fa-solid fa-trash"></i></a>
-                                            </td>';
-                                echo '</tr>';
-                            }
+                                    <a class="editar mx-auto text-success" href="billDetails.php?id=' . $billID . '"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="borrar me-auto ms-2 text-danger" onclick="deleteBill(' .$billID. ')" data-id="' .$billID. '"><i class="fa-solid fa-trash"></i></a>
+                                    </td>';
+                                    echo '</tr>';
+                                }
+                                // <a class="budgetPDF ms-auto me-2 text-primary" href=""><i class="fa-solid fa-file"></i></a> 
                         ?>
                     </tbody>
                 </table>

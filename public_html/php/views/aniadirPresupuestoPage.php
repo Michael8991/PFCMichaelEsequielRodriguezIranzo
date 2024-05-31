@@ -329,7 +329,7 @@ try {
                                 </h5>
                             </div>
                             <div class="modal-body">
-                                <form id="addCustomerForm" action="addCustomerOP.php" method="POST">
+                                <form id="addCustomerForm" action="../CustomersOPs/insertCustomer.php" method="POST">
                                     <div class="mb-3">
                                         <label for="first_name" class="form-label">Nombre:</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" required>
@@ -371,27 +371,27 @@ try {
                                 </h5>
                             </div>
                             <div class="modal-body">
-                                <form id="addProjectForm" action="addProjectOP.php" method="POST">
+                                <form id="addProjectForm" action="../ProjectsOPs/insertProject.php" method="POST">
                                     <div class="mb-3">
                                         <label for="projectName" class="form-label"><span class="required me-1">*</span>Nombre del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectName" name="projectName" required>
+                                        <input type="text" class="form-control" id="projectName" name="proyectNameInput" required>
                                     </div>
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <label for="projectDescription" class="form-label">Descripción del Proyecto:</label>
                                         <input type="text" class="form-control" id="projectDescription" name="projectDescription">
-                                    </div>
+                                    </div> -->
                                     <div class="mb-3">
                                         <label for="startDate" class="form-label">Fecha de Inicio:</label>
-                                        <input type="date" class="form-control" id="startDate" name="startDate">
+                                        <input type="date" class="form-control" id="startDate" name="fechaEmisionInput">
                                     </div>
                                     <div class="mb-3">
                                         <label for="endDate" class="form-label">Fecha de Finalización:</label>
-                                        <input type="date" class="form-control" id="endDate" name="endDate">
+                                        <input type="date" class="form-control" id="endDate" name="fechaValidezInput">
                                     </div>
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <label for="projectStatus" class="form-label">Estado del Proyecto:</label>
                                         <input type="text" class="form-control" id="projectStatus" name="projectStatus">
-                                    </div>
+                                    </div> -->
                                     <div class="mb-3">
                                         <label for="customerInputName" class="form-label"><span class="required me-1">*</span> Cliente:</label>
                                         <input type="text" class="form-control" id="customerInputName" name="customerInputName" Disabled readonly required>
@@ -401,12 +401,23 @@ try {
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="projectPriority" class="form-label">Prioridad del Proyecto:</label>
-                                        <input type="text" class="form-control" id="projectPriority" name="projectPriority">
+                                        <label for="proyectPriorityInput">Prioridad del proyecto:</label>
+                                        <select name="proyectPriorityInput" class="form-select mb-3" aria-label="Large select example">
+                                            <option selected>Seleccione la prioridad</option>
+                                            <option value="Alta">Alta</option>
+                                            <option value="Media">Media</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="location" class="form-label">Ubicación:</label>
-                                        <input type="text" class="form-control" id="location" name="location">
+                                        <input type="text" class="form-control" id="location" name="proyectPlaceInput">
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-floating" style="width: 100% !important">
+                                            <textarea name="floatingTextarea2" class="form-control col-12" placeholder="Introduce las descripción del proyecto" id="floatingTextarea2" style="height: 100px;"></textarea>
+                                            <label for="floatingTextarea2">Descripción del proyecto</label>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -460,22 +471,22 @@ try {
                                 </h5>
                             </div>
                             <div class="modal-body">
-                                <form id="addCustomerForm" action="addCustomerOP.php" method="POST">
+                                <form id="addServiceForm" action="../ServicesOPs/insertService.php" method="POST">
                                     <div class="mb-3">
-                                        <label for="first_name" class="form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                        <label for="service_name" class="form-label">Nombre:</label>
+                                        <input type="text" class="form-control" id="service_name" name="service_name" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="last_name" class="form-label">Descripción:</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name">
+                                        <label for="service_description" class="form-label">Descripción:</label>
+                                        <input type="text" class="form-control" id="service_description" name="service_description">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Precio unidad:</label>
-                                        <input type="number" class="form-control" id="email" name="email">
+                                        <label for="unit_price" class="form-label">Precio unidad:</label>
+                                        <input type="text" class="form-control" id="unit_price" name="unit_price">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="phone_number" class="form-label">Formato unidad:</label>
-                                        <select class="form-select" aria-label="Default select example" required>
+                                        <label for="unit_format" class="form-label">Formato unidad:</label>
+                                        <select class="form-select" name="unit_format" aria-label="Default select example" required>
                                             <option selected>Seleccione un formato</option>
                                             <option value="Jornal">Jornal</option>
                                             <option value="Hora">Hora</option>
@@ -484,7 +495,7 @@ try {
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" form="addCustomerForm">Aceptar</button>
+                                <button type="submit" class="btn btn-success" form="addServiceForm">Aceptar</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeAddServicesModal()">Cancelar</button>
                             </div>
                         </div>
